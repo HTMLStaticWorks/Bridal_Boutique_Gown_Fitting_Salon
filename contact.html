@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Atelier</title>
+  <meta name="description" content="Questions before booking? Reach the Atelier salon on Elegance Avenue, Paris — by phone, email, or the form here.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/rtl.css">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <style>
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: clamp(28px, 4vw, 64px);
+      align-items: start;
+    }
+    .contact-card {
+      background: var(--surface);
+      padding: clamp(28px, 3.5vw, 48px);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      position: relative;
+    }
+    .contact-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--gold-grad);
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    }
+    .contact-info {
+      background: var(--surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: clamp(24px, 3vw, 40px);
+      box-shadow: var(--shadow-sm);
+    }
+    .contact-info-item {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      padding: var(--spacing-3) 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .contact-info-item:last-of-type { border-bottom: none; }
+    .contact-info-item i {
+      font-size: 1.4rem;
+      color: var(--accent-color);
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+    .contact-info-item h4 { font-size: 1.05rem; margin-bottom: 2px; }
+    .contact-info-item p { color: var(--muted); font-size: .92rem; }
+    .contact-info-item a:hover { color: var(--accent-color); }
+
+    .map-frame {
+      width: 100%;
+      height: 320px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-top: var(--spacing-4);
+      border: 1px solid var(--border-color);
+      position: relative;
+      background:
+        linear-gradient(135deg, var(--surface-2) 0%, var(--surface) 100%);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: var(--muted);
+      font-size: .8rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+    .map-frame iframe { width: 100%; height: 100%; border: 0; display: block; filter: grayscale(.35) sepia(.12); }
+
+    @media (max-width: 900px) {
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="scroll-progress"></div>
+
+  <!-- Announcement -->
+  <div class="topbar">
+    <i class="ph-light ph-sparkle"></i> The 2026 Collection has arrived — private previews now open
+  </div>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-logo">Atelier<small>Bridal Salon</small></a>
+
+      <nav class="nav-menu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="home2.html" class="nav-link">Home 2</a>
+        <a href="shop.html" class="nav-link">Shop</a>
+        <a href="bridal-party.html" class="nav-link">Bridal Party</a>
+        <a href="appointments.html" class="nav-link">Appointments</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link active">Contact</a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="icon-btn rtl-toggle" aria-label="Toggle text direction"><i class="ph-light ph-arrows-left-right"></i></button>
+        <button class="icon-btn theme-toggle" aria-label="Toggle theme"><i class="ph-light ph-moon"></i></button>
+        <a href="login.html" class="btn btn-primary btn-sm nav-cta">Login</a>
+        <button class="icon-btn hamburger" aria-label="Open menu" aria-expanded="false"><i class="ph-light ph-list"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer">
+    <button class="icon-btn drawer-close" aria-label="Close menu"><i class="ph-light ph-x"></i></button>
+    <nav class="drawer-menu">
+      <a href="index.html" class="drawer-link">Home</a>
+      <a href="home2.html" class="drawer-link">Home 2</a>
+      <a href="shop.html" class="drawer-link">Shop</a>
+      <a href="bridal-party.html" class="drawer-link">Bridal Party</a>
+      <a href="appointments.html" class="drawer-link">Appointments</a>
+      <a href="about.html" class="drawer-link">About</a>
+      <a href="contact.html" class="drawer-link active">Contact</a>
+      <a href="dashboard.html" class="drawer-link">Dashboard</a>
+    </nav>
+    <div class="drawer-actions">
+      <button class="icon-btn rtl-toggle" aria-label="Toggle text direction"><i class="ph-light ph-arrows-left-right"></i></button>
+      <button class="icon-btn theme-toggle" aria-label="Toggle theme"><i class="ph-light ph-moon"></i></button>
+      <a href="login.html" class="btn btn-primary btn-sm">Login</a>
+    </div>
+  </div>
+  <div class="overlay"></div>
+
+  <!-- Page Header -->
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow fade-in">We're Listening</span>
+      <h1 class="fade-in">Get in Touch</h1>
+      <p class="fade-in">A question before booking your consultation? Someone from the salon answers every message personally.</p>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section">
+    <div class="container">
+      <div class="contact-grid">
+
+        <div class="contact-card" data-reveal="left">
+          <span class="eyebrow eyebrow-start">Send a Note</span>
+          <h3 style="margin-bottom: var(--spacing-4);">Tell us what you need</h3>
+
+          <form action="https://formspree.io/f/placeholder" method="POST" class="needs-validation" novalidate>
+            <div class="form-group">
+              <label for="name">Name *</label>
+              <input type="text" id="name" name="name" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address *</label>
+              <input type="email" id="email" name="email" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" class="form-control" placeholder="Alterations, availability, press…">
+            </div>
+            <div class="form-group">
+              <label for="message">Message *</label>
+              <textarea id="message" name="message" class="form-control" rows="5" required></textarea>
+            </div>
+            <div class="form-group" style="margin-top: var(--spacing-4);">
+              <p class="form-error-msg" style="display: none; margin-bottom: 16px;">Please fill in all required fields.</p>
+              <button type="submit" class="btn btn-primary btn-block btn-lg">Send Message</button>
+              <p style="font-size: .78rem; color: var(--muted); margin-top: 14px; text-align: center;">
+                We reply within one working day, Tuesday to Saturday.
+              </p>
+            </div>
+          </form>
+        </div>
+
+        <div data-reveal="right">
+          <div class="contact-info">
+            <div class="contact-info-item">
+              <i class="ph-light ph-map-pin"></i>
+              <div>
+                <h4>The Salon</h4>
+                <p>123 Elegance Avenue<br>Paris, 75008</p>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <i class="ph-light ph-phone"></i>
+              <div>
+                <h4>Phone</h4>
+                <p><a href="tel:+33123456789">+33 1 23 45 67 89</a></p>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <i class="ph-light ph-envelope-simple"></i>
+              <div>
+                <h4>Email</h4>
+                <p><a href="mailto:bonjour@atelierbridal.com">bonjour@atelierbridal.com</a></p>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <i class="ph-light ph-clock"></i>
+              <div>
+                <h4>Opening Hours</h4>
+                <p>Tuesday – Saturday, 10am – 7pm<br>Sunday &amp; Monday by appointment</p>
+              </div>
+            </div>
+
+            <div class="social-row" style="justify-content: flex-start;">
+              <a href="#" aria-label="Instagram"><i class="ph-light ph-instagram-logo"></i></a>
+              <a href="#" aria-label="Pinterest"><i class="ph-light ph-pinterest-logo"></i></a>
+              <a href="#" aria-label="Facebook"><i class="ph-light ph-facebook-logo"></i></a>
+            </div>
+          </div>
+
+          <!-- Google Maps -->
+          <div class="map-frame">
+            <iframe
+              src="https://maps.google.com/maps?q=Avenue%20Montaigne%2C%2075008%20Paris&amp;z=15&amp;output=embed"
+              title="Map to Atelier Bridal Salon, Paris 75008"
+              loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a href="index.html" class="nav-logo">Atelier<small>Bridal Salon</small></a>
+          <p>An intimate, high-touch gown fitting salon for the romantic bride. 123 Elegance Avenue, Paris 75008.</p>
+          <div class="social-row">
+            <a href="#" aria-label="Instagram"><i class="ph-light ph-instagram-logo"></i></a>
+            <a href="#" aria-label="Pinterest"><i class="ph-light ph-pinterest-logo"></i></a>
+            <a href="#" aria-label="Facebook"><i class="ph-light ph-facebook-logo"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="shop.html">The Collection</a></li>
+            <li><a href="home2.html">2026 Lookbook</a></li>
+            <li><a href="appointments.html">Appointments</a></li>
+            <li><a href="bridal-party.html">Bridal Party</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Client Care</h4>
+          <ul>
+            <li><a href="login.html">Bride Portal</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="coming-soon.html">Alterations Studio</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>The Invitation List</h4>
+          <p>Trunk shows, sample sales and private previews — a few times a year, never more.</p>
+          <form class="newsletter-form">
+            <input type="email" placeholder="Your email" class="form-control" aria-label="Email address" required>
+            <button type="submit" class="btn btn-primary">Join</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Atelier Bridal Boutique. All rights reserved.</p>
+        <div class="legal">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="contact.html">Press</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

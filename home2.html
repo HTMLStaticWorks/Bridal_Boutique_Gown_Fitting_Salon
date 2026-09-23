@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The 2026 Lookbook — Atelier</title>
+  <meta name="description" content="The Atelier 2026 Lookbook: four silhouettes, four moods. Build your gown in the Styling Studio and bring it to your fitting.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/rtl.css">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <style>
+    .lookbook-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2px;
+      background: var(--border-color);
+    }
+    .lookbook-pane {
+      position: relative;
+      min-height: min(78vh, 720px);
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      isolation: isolate;
+    }
+    .lookbook-pane .pane-bg {
+      position: absolute; inset: 0;
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.04);
+      transition: transform 1.6s var(--ease), filter 1.2s var(--ease);
+      filter: saturate(.92);
+    }
+    .lookbook-pane::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(20,12,10,.25) 0%, rgba(20,12,10,0) 40%, rgba(20,12,10,.8) 100%);
+    }
+    .lookbook-pane:hover .pane-bg { transform: scale(1.11); filter: saturate(1.05); }
+    .pane-body {
+      position: relative;
+      z-index: 2;
+      padding: clamp(28px, 4vw, 56px);
+      color: #fff;
+      width: 100%;
+    }
+    .pane-body h2 { color: #fff; margin-bottom: 6px; }
+    .pane-body { text-align: center; }
+    .pane-body .eyebrow-start::before { display: inline-block; }
+    .pane-body p { color: rgba(255,255,255,.82); margin: 0 auto 18px; max-width: 38ch; }
+    .pane-body .eyebrow { color: var(--accent-soft); }
+    .pane-body .eyebrow::before, .pane-body .eyebrow::after { background: rgba(255,255,255,.45); }
+    .pane-body .link-underline { color: #fff; }
+    .pane-body .link-underline::after { background: var(--accent-soft); }
+
+    .journey {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(20px, 3vw, 40px);
+      counter-reset: step;
+    }
+    .journey-step { position: relative; padding-top: var(--spacing-4); text-align: center; }
+    .journey-step::before {
+      counter-increment: step;
+      content: '0' counter(step);
+      font-family: var(--font-heading);
+      font-size: 2.6rem;
+      color: var(--accent-color);
+      opacity: .45;
+      line-height: 1;
+      display: block;
+      margin-bottom: 12px;
+    }
+    .journey-step::after {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 1px;
+      background: var(--border-color);
+    }
+    .journey-media { aspect-ratio: 4 / 3; overflow: hidden; border-radius: var(--border-radius); margin-bottom: var(--spacing-3); }
+    .journey-media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .8s ease; }
+    .journey-step:hover .journey-media img { transform: scale(1.06); }
+    @media (max-width: 991px) {
+      .journey { grid-template-columns: repeat(2, 1fr); }
+      .journey-step:nth-child(3) { grid-column: 1 / -1; justify-self: center; width: calc(50% - clamp(20px, 3vw, 40px) / 2); }
+    }
+    @media (max-width: 767px) {
+      .journey { grid-template-columns: 1fr; }
+      .journey-step:nth-child(3) { width: 100%; }
+    }
+    .journey-step h4 { margin-bottom: 8px; }
+    .journey-step p { color: var(--muted); font-size: .94rem; }
+  </style>
+</head>
+<body>
+  <div class="scroll-progress"></div>
+
+  <div class="topbar">
+    <i class="ph-light ph-sparkle"></i> The 2026 Collection has arrived — private previews now open
+  </div>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-logo">Atelier<small>Bridal Salon</small></a>
+
+      <nav class="nav-menu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="home2.html" class="nav-link active">Home 2</a>
+        <a href="shop.html" class="nav-link">Shop</a>
+        <a href="bridal-party.html" class="nav-link">Bridal Party</a>
+        <a href="appointments.html" class="nav-link">Appointments</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="icon-btn rtl-toggle" aria-label="Toggle text direction"><i class="ph-light ph-arrows-left-right"></i></button>
+        <button class="icon-btn theme-toggle" aria-label="Toggle theme"><i class="ph-light ph-moon"></i></button>
+        <a href="login.html" class="btn btn-primary btn-sm nav-cta">Login</a>
+        <button class="icon-btn hamburger" aria-label="Open menu" aria-expanded="false"><i class="ph-light ph-list"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer">
+    <button class="icon-btn drawer-close" aria-label="Close menu"><i class="ph-light ph-x"></i></button>
+    <nav class="drawer-menu">
+      <a href="index.html" class="drawer-link">Home</a>
+      <a href="home2.html" class="drawer-link active">Home 2</a>
+      <a href="shop.html" class="drawer-link">Shop</a>
+      <a href="bridal-party.html" class="drawer-link">Bridal Party</a>
+      <a href="appointments.html" class="drawer-link">Appointments</a>
+      <a href="about.html" class="drawer-link">About</a>
+      <a href="contact.html" class="drawer-link">Contact</a>
+      <a href="dashboard.html" class="drawer-link">Dashboard</a>
+    </nav>
+    <div class="drawer-actions">
+      <button class="icon-btn rtl-toggle" aria-label="Toggle text direction"><i class="ph-light ph-arrows-left-right"></i></button>
+      <button class="icon-btn theme-toggle" aria-label="Toggle theme"><i class="ph-light ph-moon"></i></button>
+      <a href="login.html" class="btn btn-primary btn-sm">Login</a>
+    </div>
+  </div>
+  <div class="overlay"></div>
+
+  <!-- Lookbook intro -->
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow fade-in">Volume Eleven</span>
+      <h1 class="fade-in">The 2026 Lookbook</h1>
+      <p class="fade-in">Four silhouettes, four moods. Photographed over three days in the salon on Elegance Avenue — no studio, no retouching, just morning light.</p>
+    </div>
+  </section>
+
+  <!-- Full-bleed editorial panes -->
+  <div class="lookbook-grid">
+    <article class="lookbook-pane">
+      <div class="pane-bg" style="background-image: url('https://images.unsplash.com/photo-1549417229-aa67d3263c09?q=80&amp;w=1974&amp;auto=format&amp;fit=crop');"></div>
+      <div class="pane-body">
+        <span class="eyebrow eyebrow-start">Chapter One</span>
+        <h2>The Classic</h2>
+        <p>Silk Mikado holds a line the way architecture does. Cut once, cut correctly.</p>
+        <a href="shop.html" class="link-underline">Explore the Classic</a>
+      </div>
+    </article>
+
+    <article class="lookbook-pane">
+      <div class="pane-bg" style="background-image: url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&amp;w=2000&amp;auto=format&amp;fit=crop');"></div>
+      <div class="pane-body">
+        <span class="eyebrow eyebrow-start">Chapter Two</span>
+        <h2>The Romantic</h2>
+        <p>Nine layers of tulle and lace set by hand. You hear it before you see it.</p>
+        <a href="shop.html" class="link-underline">Explore the Romantic</a>
+      </div>
+    </article>
+  </div>
+
+  <!-- Marquee -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Maison Blanche</span><span>&middot;</span><span>L'Amour</span><span>&middot;</span>
+      <span>Atelier Exclusive</span><span>&middot;</span><span>Céleste Rive</span><span>&middot;</span>
+      <span>Vera Duval</span><span>&middot;</span>
+      <span>Maison Blanche</span><span>&middot;</span><span>L'Amour</span><span>&middot;</span>
+      <span>Atelier Exclusive</span><span>&middot;</span><span>Céleste Rive</span><span>&middot;</span>
+      <span>Vera Duval</span><span>&middot;</span>
+    </div>
+  </div>
+
+  <!-- ===================================================
+       INTERACTIVE — The Styling Studio
+       =================================================== -->
+  <section class="section" id="studio">
+    <div class="container">
+      <div class="section-header" data-reveal>
+        <span class="eyebrow">Interactive</span>
+        <h2>The Styling Studio</h2>
+        <p>Build the gown before you book. Change the silhouette, cloth, train and tone — the estimate updates as you go, and your selections travel with you to the fitting.</p>
+      </div>
+
+      <div class="studio" data-studio data-reveal="zoom">
+
+        <!-- Stage -->
+        <div class="studio-stage">
+          <div class="studio-layer is-active" data-key="classic"  style="background-image: url('https://images.unsplash.com/photo-1549417229-aa67d3263c09?q=80&amp;w=1974&amp;auto=format&amp;fit=crop');"></div>
+          <div class="studio-layer" data-key="romantic" style="background-image: url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&amp;w=2000&amp;auto=format&amp;fit=crop');"></div>
+          <div class="studio-layer" data-key="modern"   style="background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&amp;w=2000&amp;auto=format&amp;fit=crop');"></div>
+          <div class="studio-layer" data-key="sheath"   style="background-image: url('https://images.unsplash.com/photo-1591604466107-ec97de577aff?q=80&amp;w=2070&amp;auto=format&amp;fit=crop');"></div>
+
+          <div class="studio-tint"></div>
+          <div class="studio-veil"></div>
+
+          <div class="studio-stage-foot">
+            <div>
+              <h4 data-studio-gown>The Genevieve</h4>
+              <p data-studio-line>A-Line · Silk Mikado · Ivory</p>
+            </div>
+            <div class="studio-estimate">
+              <div class="label">Estimate</div>
+              <div class="value" data-studio-price>$3,090</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Control panel -->
+        <div class="studio-panel">
+
+          <div class="studio-group">
+            <div class="studio-group-head">
+              <h5>Silhouette</h5>
+              <span class="current" data-cur-silhouette>A-Line</span>
+            </div>
+            <div class="chip-row">
+              <button type="button" class="chip selected" data-opt="silhouette" data-value="classic">A-Line</button>
+              <button type="button" class="chip" data-opt="silhouette" data-value="romantic">Ball Gown</button>
+              <button type="button" class="chip" data-opt="silhouette" data-value="modern">Mermaid</button>
+              <button type="button" class="chip" data-opt="silhouette" data-value="sheath">Sheath</button>
+            </div>
+          </div>
+
+          <div class="studio-group">
+            <div class="studio-group-head">
+              <h5>Cloth</h5>
+              <span class="current" data-cur-fabric>Silk Mikado</span>
+            </div>
+            <div class="chip-row">
+              <button type="button" class="chip selected" data-opt="fabric" data-value="mikado">Silk Mikado</button>
+              <button type="button" class="chip" data-opt="fabric" data-value="lace">Chantilly Lace</button>
+              <button type="button" class="chip" data-opt="fabric" data-value="crepe">Crepe</button>
+              <button type="button" class="chip" data-opt="fabric" data-value="georgette">Georgette</button>
+            </div>
+          </div>
+
+          <div class="studio-group">
+            <div class="studio-group-head">
+              <h5>Train</h5>
+              <span class="current" data-cur-train>Chapel</span>
+            </div>
+            <div class="chip-row">
+              <button type="button" class="chip" data-opt="train" data-value="brush">Brush</button>
+              <button type="button" class="chip selected" data-opt="train" data-value="chapel">Chapel</button>
+              <button type="button" class="chip" data-opt="train" data-value="cathedral">Cathedral</button>
+            </div>
+          </div>
+
+          <div class="studio-group">
+            <div class="studio-group-head">
+              <h5>Tone</h5>
+              <span class="current" data-cur-tone>Ivory</span>
+            </div>
+            <div class="swatch-row">
+              <button type="button" class="swatch selected" data-opt="tone" data-value="ivory"     style="background:#FDFBF6" aria-label="Ivory"></button>
+              <button type="button" class="swatch" data-opt="tone" data-value="champagne" style="background:#E6CFA8" aria-label="Champagne"></button>
+              <button type="button" class="swatch" data-opt="tone" data-value="blush"     style="background:#EEC9C4" aria-label="Blush"></button>
+              <button type="button" class="swatch" data-opt="tone" data-value="pearl"     style="background:#D6D2CC" aria-label="Pearl Grey"></button>
+            </div>
+          </div>
+
+          <div class="studio-toggle">
+            <span class="t-label">
+              Cathedral veil
+              <small>Hand-rolled edge, 3m drop</small>
+            </span>
+            <button type="button" class="switch" data-studio-veil aria-pressed="true" aria-label="Include cathedral veil"></button>
+          </div>
+
+          <div class="studio-summary">
+            <div class="row"><span>Base gown</span><b data-sum-base></b></div>
+            <div class="row"><span>Cloth</span><b data-sum-fabric></b></div>
+            <div class="row"><span>Train</span><b data-sum-train></b></div>
+            <div class="row"><span>Veil</span><b data-sum-veil></b></div>
+            <div class="row total"><span>Estimate</span><b data-studio-total></b></div>
+          </div>
+
+          <div class="studio-actions">
+            <a href="appointments.html" class="btn btn-primary btn-block" data-studio-book>Bring this to a fitting</a>
+            <button type="button" class="studio-reset" data-studio-reset>Reset selections</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bespoke experience split -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="split split-story">
+        <div data-reveal="left">
+          <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&amp;w=2000&amp;auto=format&amp;fit=crop"
+               alt="A bride at her fitting"
+               style="border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); aspect-ratio: 4/5; object-fit: cover; width: 100%;">
+        </div>
+        <div data-reveal="right">
+          <span class="eyebrow eyebrow-start">The Experience</span>
+          <h2 style="margin-bottom: var(--spacing-3);">Your vision becomes our obsession</h2>
+          <p class="lead" style="margin-bottom: var(--spacing-4);">
+            From the moment you step into the salon, one stylist is yours — through the first rail, the long pause in front of the mirror, and every fitting after.
+          </p>
+          <p style="color: var(--muted); margin-bottom: var(--spacing-5);">
+            Most brides find their gown in the second hour. Some find it in the first ten minutes and spend the rest of the afternoon making sure. Both are welcome here.
+          </p>
+          <a href="appointments.html" class="btn btn-outline">Book a Consultation</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The fitting journey -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header" data-reveal>
+        <span class="eyebrow">The Process</span>
+        <h2>From first rail to final press</h2>
+        <p>Three appointments across roughly eight months. We hold your hand through all of them.</p>
+      </div>
+
+      <div class="journey">
+        <div class="journey-step" data-reveal style="--delay: 0ms">
+          <div class="journey-media"><img src="https://images.unsplash.com/photo-1549417229-aa67d3263c09?q=80&amp;auto=format&amp;fit=crop&amp;w=800" alt="Consultation" loading="lazy"></div>
+          <h4>Consultation</h4>
+          <p>Two private hours. We listen first, pull gowns second, and never bring out more than you asked for.</p>
+        </div>
+        <div class="journey-step" data-reveal style="--delay: 100ms">
+          <div class="journey-media"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&amp;auto=format&amp;fit=crop&amp;w=800" alt="Selection" loading="lazy"></div>
+          <h4>Selection</h4>
+          <p>Your gown is ordered to your measurements from the atelier that made the sample.</p>
+        </div>
+        <div class="journey-step" data-reveal style="--delay: 200ms">
+          <div class="journey-media"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&amp;auto=format&amp;fit=crop&amp;w=800" alt="Alterations" loading="lazy"></div>
+          <h4>Alterations</h4>
+          <p>Three fittings with our master tailors — bodice, hem, then the details nobody else would notice.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section section-alt" id="testimonials">
+    <div class="container">
+      <div class="section-header" data-reveal>
+        <span class="eyebrow">Kind Words</span>
+        <h2>Brides on the 2026 collection</h2>
+        <p>Three women who stood in these gowns before you did.</p>
+      </div>
+
+      <div class="testimonial-feature" data-testimonials data-reveal="zoom">
+
+        <!-- Portraits -->
+        <div class="tf-media">
+          <div class="tf-img is-active" style="background-image: url('https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&amp;w=1061&amp;auto=format&amp;fit=crop');"></div>
+          <div class="tf-img" style="background-image: url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&amp;w=1064&amp;auto=format&amp;fit=crop');"></div>
+          <div class="tf-img" style="background-image: url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&amp;w=988&amp;auto=format&amp;fit=crop');"></div>
+        </div>
+
+        <!-- Quotes -->
+        <div class="tf-panel">
+          <div class="tf-mark" aria-hidden="true">&ldquo;</div>
+
+          <div class="tf-slides">
+            <div class="tf-slide is-active">
+              <div class="stars" aria-label="Five out of five">★★★★★</div>
+              <blockquote>I had been to six boutiques before this one. Twenty minutes at Atelier and I was in tears — they understood the shape I wanted before I could describe it.</blockquote>
+              <cite class="tf-cite">
+                <b>Marguerite Dubois</b>
+                <span>The Amelie · June 2026</span>
+              </cite>
+            </div>
+
+            <div class="tf-slide">
+              <div class="stars" aria-label="Five out of five">★★★★★</div>
+              <blockquote>The alterations were extraordinary. Three fittings and the gown moved like it had been grown on me rather than sewn for me.</blockquote>
+              <cite class="tf-cite">
+                <b>Priya Nair</b>
+                <span>The Genevieve · September 2025</span>
+              </cite>
+            </div>
+
+            <div class="tf-slide">
+              <div class="stars" aria-label="Five out of five">★★★★★</div>
+              <blockquote>Nobody rushed us, not once. My mother still talks about that afternoon in the salon more than she talks about the ceremony.</blockquote>
+              <cite class="tf-cite">
+                <b>Eleni Kyriakou</b>
+                <span>The Celine · April 2026</span>
+              </cite>
+            </div>
+          </div>
+
+          <div class="tf-foot">
+            <div class="tf-dots" role="tablist" aria-label="Choose a testimonial">
+              <button type="button" class="tf-dot is-active" role="tab" aria-selected="true" aria-label="Testimonial 1"></button>
+              <button type="button" class="tf-dot" role="tab" aria-selected="false" aria-label="Testimonial 2"></button>
+              <button type="button" class="tf-dot" role="tab" aria-selected="false" aria-label="Testimonial 3"></button>
+            </div>
+            <div class="tf-nav">
+              <button type="button" class="icon-btn" data-tf-prev aria-label="Previous testimonial"><i class="ph-light ph-arrow-left"></i></button>
+              <button type="button" class="icon-btn" data-tf-next aria-label="Next testimonial"><i class="ph-light ph-arrow-right"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA band -->
+  <section class="cta-band">
+    <div class="container" data-reveal="fade">
+      <span class="eyebrow">Private Previews</span>
+      <h2>See the 2026 collection in person</h2>
+      <p>The lookbook is only half of it. Fabric, weight and movement are things you have to stand inside.</p>
+      <a href="appointments.html" class="btn btn-gold btn-lg">Request an Appointment</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a href="index.html" class="nav-logo">Atelier<small>Bridal Salon</small></a>
+          <p>An intimate, high-touch gown fitting salon for the romantic bride. 123 Elegance Avenue, Paris 75008.</p>
+          <div class="social-row">
+            <a href="#" aria-label="Instagram"><i class="ph-light ph-instagram-logo"></i></a>
+            <a href="#" aria-label="Pinterest"><i class="ph-light ph-pinterest-logo"></i></a>
+            <a href="#" aria-label="Facebook"><i class="ph-light ph-facebook-logo"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="shop.html">The Collection</a></li>
+            <li><a href="home2.html">2026 Lookbook</a></li>
+            <li><a href="appointments.html">Appointments</a></li>
+            <li><a href="bridal-party.html">Bridal Party</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Client Care</h4>
+          <ul>
+            <li><a href="login.html">Bride Portal</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="coming-soon.html">Alterations Studio</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>The Invitation List</h4>
+          <p>Trunk shows, sample sales and private previews — a few times a year, never more.</p>
+          <form class="newsletter-form">
+            <input type="email" placeholder="Your email" class="form-control" aria-label="Email address" required>
+            <button type="submit" class="btn btn-primary">Join</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Atelier Bridal Boutique. All rights reserved.</p>
+        <div class="legal">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="contact.html">Press</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bride Dashboard — Atelier</title>
+  <meta name="description" content="Your Atelier Bride Portal: alterations timeline, appointments, saved gowns and payment plan.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/rtl.css">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <style>
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: clamp(22px, 2.6vw, 36px);
+      box-shadow: var(--shadow-md);
+    }
+    .panel + .panel { margin-top: var(--spacing-3); }
+    .panel-accent { border-left: 2px solid var(--accent-color); }
+
+    .panel-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      padding-bottom: var(--spacing-3);
+      margin-bottom: var(--spacing-3);
+      border-bottom: 1px solid var(--border-color);
+    }
+    .panel-head h3 { font-size: 1.5rem; }
+    .panel-head .meta { font-size: .78rem; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+
+    .dash-head { margin-bottom: var(--spacing-5); max-width: 900px; }
+    .dash-head h2 { margin-bottom: 8px; }
+    .dash-head p { color: var(--muted); }
+
+    .row-between { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+    .appt-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .appt-when {
+      display: flex; gap: 18px; flex-wrap: wrap;
+      font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted);
+      margin-top: 8px;
+    }
+    .appt-when i { color: var(--accent-color); vertical-align: -2px; margin-right: 6px; }
+
+    /* Table, in the spirit of a statement sheet */
+    .dash-table { width: 100%; border-collapse: collapse; }
+    .dash-table th {
+      text-align: left;
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: .64rem;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 0 var(--spacing-2) var(--spacing-2);
+      border-bottom: 1px solid var(--border-color);
+    }
+    .dash-table td {
+      padding: var(--spacing-3) var(--spacing-2);
+      border-bottom: 1px solid var(--border-color);
+      font-size: .94rem;
+    }
+    .dash-table tr:last-child td { border-bottom: none; }
+    .dash-table tbody tr { transition: background-color .3s var(--ease); }
+    .dash-table tbody tr:hover { background: var(--surface-2); }
+    .dash-table .num { font-variant-numeric: tabular-nums; }
+    .table-scroll { overflow-x: auto; }
+    html[dir="rtl"] .dash-table th { text-align: right; }
+
+    .money-head {
+      display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+      padding-bottom: var(--spacing-3);
+      margin-bottom: var(--spacing-3);
+      border-bottom: 1px solid var(--border-color);
+    }
+    .money-label { font-size: .64rem; letter-spacing: .24em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+    .money-value { font-family: var(--font-heading); font-size: 2rem; color: var(--primary-color); line-height: 1; }
+
+    .installment {
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .installment:last-of-type { border-bottom: none; }
+    .installment .when { font-size: .82rem; color: var(--muted); }
+    .pill-paid {
+      font-size: .62rem; letter-spacing: .2em; text-transform: uppercase;
+      color: #2E7D5B; border: 1px solid rgba(46,125,91,.35);
+      background: rgba(46,125,91,.08);
+      padding: 5px 12px; border-radius: var(--radius-pill);
+    }
+
+    .progress-bar {
+      height: 4px;
+      background: var(--border-color);
+      border-radius: var(--radius-pill);
+      overflow: hidden;
+      margin-top: var(--spacing-3);
+    }
+    .progress-bar span { display: block; height: 100%; width: 50%; background: var(--gold-grad); }
+
+    .empty-state { text-align: center; padding: var(--spacing-6) var(--spacing-3); }
+    .empty-state i { font-size: 3rem; color: var(--hairline); margin-bottom: var(--spacing-2); }
+    .empty-state p { color: var(--muted); max-width: 44ch; margin: 8px auto var(--spacing-4); }
+
+    .past-row {
+      display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--muted);
+    }
+    .past-row:last-child { border-bottom: none; }
+    .past-row b { color: var(--text-color); font-weight: 400; }
+    /* Dashboard statements: stacked cards on mobile */
+    @media (max-width: 600px) {
+      .dash-table, .dash-table tbody { display: block; width: 100%; min-width: 0; }
+      .dash-table thead { display: none; }
+      .dash-table tr {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-areas: "desc amount" "date receipt";
+        gap: 6px 16px;
+        align-items: baseline;
+        padding: 18px 0;
+        border-bottom: 1px solid var(--border-color);
+      }
+      .dash-table tr:last-child { border-bottom: 0; }
+      .dash-table td { display: block; padding: 0; border: 0; white-space: normal; }
+      .dash-table td:nth-child(1) { grid-area: date; font-size: .78rem; color: var(--muted); letter-spacing: .04em; }
+      .dash-table td:nth-child(2) { grid-area: desc; font-family: var(--font-heading); font-size: 1.1rem; color: var(--text-color); line-height: 1.3; }
+      .dash-table td:nth-child(3) { grid-area: amount; font-family: var(--font-heading); font-size: 1.15rem; color: var(--primary-color); text-align: right; }
+      .dash-table td:nth-child(4) { grid-area: receipt; text-align: right; font-size: .72rem; }
+      .table-scroll { overflow: visible; }
+    }
+    /* Alterations progress: vertical timeline on mobile */
+    @media (max-width: 600px) {
+      .status-tracker {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 22px;
+        margin: var(--spacing-4) 0 var(--spacing-2);
+      }
+      .status-tracker::before { top: 23px; bottom: 23px; left: 22px; width: 1px; height: auto; }
+      .status-step {
+        width: auto; height: auto;
+        display: flex; align-items: center; gap: 16px;
+        background: none; border: 0; border-radius: 0; box-shadow: none;
+      }
+      .status-step i {
+        flex: 0 0 46px; width: 46px; height: 46px;
+        display: grid; place-items: center;
+        border-radius: 50%;
+        border: 1px solid var(--border-color);
+        background: var(--surface);
+      }
+      .status-step.completed { background: none; box-shadow: none; color: var(--muted); }
+      .status-step.completed i {
+        background: var(--gold-grad); color: #fff; border-color: transparent;
+        box-shadow: 0 0 0 5px rgba(176,141,79,.14);
+      }
+      .status-step:not(.completed) + .status-step:not(.completed) i { opacity: .8; }
+      .status-step.completed + .status-step:not(.completed) i { border-color: var(--accent-color); color: var(--accent-color); }
+      .status-step.completed + .status-step:not(.completed) .status-label { color: var(--text-color); }
+      .status-label {
+        position: static; transform: none; margin: 0;
+        font-size: .72rem; letter-spacing: .18em;
+      }
+      .status-step.completed .status-label { color: var(--accent-color); }
+
+      .panel-accent .row-between { flex-direction: column; align-items: flex-start; }
+      .panel-accent .row-between .btn { order: 3; width: 100%; justify-content: center; margin-top: 4px; }
+      .panel-accent h4 { font-size: 1.3rem; }
+    }
+  </style>
+</head>
+<body class="portal">
+
+  <!-- ===== Rail ===== -->
+  <aside class="portal-rail" id="portalRail">
+    <div class="portal-brand">
+      <a href="index.html" class="nav-logo">Atelier<small>Bride Portal</small></a>
+      <button class="icon-btn rail-close" aria-label="Close menu"><i class="ph-light ph-x"></i></button>
+    </div>
+
+    <nav class="portal-nav">
+      <span class="portal-nav-label">Your Gown</span>
+      <button class="dashboard-tab-btn active" data-target="tab-timeline"><i class="ph-light ph-clock-counter-clockwise"></i> Timeline</button>
+      <button class="dashboard-tab-btn" data-target="tab-appointments"><i class="ph-light ph-calendar-blank"></i> Appointments</button>
+      <button class="dashboard-tab-btn" data-target="tab-saved"><i class="ph-light ph-heart"></i> Saved Gowns</button>
+      <button class="dashboard-tab-btn" data-target="tab-payments"><i class="ph-light ph-credit-card"></i> Payment Plan</button>
+
+      <span class="portal-nav-gap"></span>
+      <span class="portal-nav-label">Account</span>
+      <button class="dashboard-tab-btn" data-target="tab-pickup"><i class="ph-light ph-package"></i> Pickup</button>
+      <button class="dashboard-tab-btn" data-target="tab-profile"><i class="ph-light ph-user"></i> Profile</button>
+    </nav>
+
+    <div class="portal-foot">
+      <a href="login.html" class="portal-logout"><i class="ph-light ph-sign-out"></i> Logout</a>
+    </div>
+  </aside>
+
+  <!-- ===== Top bar ===== -->
+  <header class="portal-bar">
+    <button class="icon-btn hamburger" aria-label="Open menu" aria-expanded="false"><i class="ph-light ph-list"></i></button>
+    <a href="index.html" class="nav-logo portal-bar-logo">Atelier<small>Bride Portal</small></a>
+
+    <div class="portal-bar-actions">
+      <button class="icon-btn theme-toggle" aria-label="Toggle theme"><i class="ph-light ph-moon"></i></button>
+      <button class="icon-btn rtl-toggle" aria-label="Toggle text direction"><i class="ph-light ph-arrows-left-right"></i></button>
+      <a href="login.html" class="dash-avatar" aria-label="Account"><i class="ph-light ph-user"></i></a>
+    </div>
+  </header>
+
+  <div class="overlay"></div>
+
+  <!-- ===== Content ===== -->
+  <main class="portal-main">
+
+    <!-- Timeline -->
+    <div id="tab-timeline" class="dashboard-tab-content active">
+      <div class="dash-head">
+        <h2>Timeline</h2>
+        <p>Welcome back, Emma — your wedding is on 12 September 2027.</p>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <h3>Alterations Progress</h3>
+          <span class="meta">The Genevieve</span>
+        </div>
+        <div class="status-tracker">
+          <div class="status-step completed">
+            <i class="ph-light ph-check"></i>
+            <span class="status-label">Ordered</span>
+          </div>
+          <div class="status-step completed">
+            <i class="ph-light ph-check"></i>
+            <span class="status-label">First Fitting</span>
+          </div>
+          <div class="status-step">
+            <i class="ph-light ph-scissors"></i>
+            <span class="status-label">Alterations</span>
+          </div>
+          <div class="status-step">
+            <i class="ph-light ph-calendar"></i>
+            <span class="status-label">Final Fitting</span>
+          </div>
+          <div class="status-step">
+            <i class="ph-light ph-bag"></i>
+            <span class="status-label">Pickup</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel panel-accent">
+        <div class="row-between">
+          <div>
+            <span class="badge">In alterations</span>
+            <h4 style="margin-top: 12px;">Hemline and bodice, in progress</h4>
+          </div>
+          <a href="contact.html" class="btn btn-outline btn-sm">Message the salon</a>
+        </div>
+        <p style="color: var(--muted); margin-top: 12px;">
+          Clara is adjusting the hemline and perfecting the bodice fit from your first fitting. Expected ready for final fitting: <b style="color: var(--text-color); font-weight: 400;">15 October 2026</b>.
+        </p>
+        <div class="progress-bar"><span></span></div>
+      </div>
+    </div>
+
+    <!-- Appointments -->
+    <div id="tab-appointments" class="dashboard-tab-content">
+      <div class="dash-head">
+        <h2>Appointments</h2>
+        <p>Everything booked, and everything behind you.</p>
+      </div>
+
+      <div class="row-between" style="margin-bottom: var(--spacing-3);">
+        <h4 style="margin: 0;">Upcoming</h4>
+        <a href="appointments.html" class="btn btn-primary btn-sm">Book New Fitting</a>
+      </div>
+
+      <div class="panel panel-accent">
+        <div class="appt-row">
+          <div>
+            <h4>Final Fitting</h4>
+            <div class="appt-when">
+              <span><i class="ph-light ph-calendar"></i> 20 October 2026</span>
+              <span><i class="ph-light ph-clock"></i> 2:00 PM</span>
+              <span><i class="ph-light ph-user"></i> With Eleanor</span>
+            </div>
+          </div>
+          <button class="btn btn-outline btn-sm">Reschedule</button>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top: var(--spacing-5);">
+        <div class="panel-head">
+          <h3>Past Appointments</h3>
+          <span class="meta">2026</span>
+        </div>
+        <div class="past-row"><b>First Fitting</b><span>Completed 15 September 2026</span></div>
+        <div class="past-row"><b>Initial Consultation</b><span>Completed 2 August 2026</span></div>
+      </div>
+    </div>
+
+    <!-- Saved Gowns -->
+    <div id="tab-saved" class="dashboard-tab-content">
+      <div class="dash-head">
+        <h2>Saved Gowns</h2>
+        <p>Kept from your visits and from the collection online.</p>
+      </div>
+
+      <div class="collections-grid">
+        <article class="card" style="padding: 0; align-items: stretch; text-align: left;">
+          <a href="gown-single.html" class="card-img-wrapper" style="margin-bottom: 0; border-radius: 0;">
+            <span class="badge badge-float">Yours</span>
+            <img src="https://images.unsplash.com/photo-1549417229-aa67d3263c09?q=80&amp;w=1974&amp;auto=format&amp;fit=crop" alt="The Genevieve">
+          </a>
+          <div style="padding: var(--spacing-3);">
+            <h4 style="margin-bottom: 4px;"><a href="gown-single.html">The Genevieve</a></h4>
+            <p style="font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px;">A-Line · $2,400</p>
+            <a href="appointments.html?gown=The%20Genevieve" class="btn btn-outline btn-sm btn-block">Book Fitting</a>
+          </div>
+        </article>
+
+        <article class="card" style="padding: 0; align-items: stretch; text-align: left;">
+          <a href="gown-single.html" class="card-img-wrapper" style="margin-bottom: 0; border-radius: 0;">
+            <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&amp;w=2000&amp;auto=format&amp;fit=crop" alt="The Amelie">
+          </a>
+          <div style="padding: var(--spacing-3);">
+            <h4 style="margin-bottom: 4px;"><a href="gown-single.html">The Amelie</a></h4>
+            <p style="font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px;">Ball Gown · $3,100</p>
+            <a href="appointments.html?gown=The%20Amelie" class="btn btn-outline btn-sm btn-block">Book Fitting</a>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- Payments -->
+    <div id="tab-payments" class="dashboard-tab-content">
+      <div class="dash-head">
+        <h2>Payment Plan</h2>
+        <p>Two instalments, no interest, nothing due until pickup.</p>
+      </div>
+
+      <div class="panel">
+        <div class="money-head">
+          <div>
+            <div class="money-label">Total</div>
+            <div class="money-value">$2,400.00</div>
+          </div>
+          <div style="text-align: right;">
+            <div class="money-label">Remaining</div>
+            <div class="money-value">$1,200.00</div>
+          </div>
+        </div>
+
+        <div class="installment">
+          <div>
+            <b style="font-weight: 400;">Deposit</b>
+            <div class="when">Paid 10 August 2026</div>
+          </div>
+          <div style="display:flex; align-items:center; gap:14px;">
+            <span class="num">$1,200.00</span>
+            <span class="pill-paid">Paid</span>
+          </div>
+        </div>
+
+        <div class="installment">
+          <div>
+            <b style="font-weight: 400;">Final instalment</b>
+            <div class="when">Due prior to pickup</div>
+          </div>
+          <span class="num">$1,200.00</span>
+        </div>
+
+        <button class="btn btn-primary btn-block pay-installment-btn" style="margin-top: var(--spacing-4);">
+          Pay Remaining Balance
+        </button>
+        <p style="font-size: .76rem; color: var(--muted); text-align: center; margin-top: 12px;">
+          Secured by Stripe · Demo checkout
+        </p>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <h3>Statements</h3>
+          <span class="meta">Year: 2026</span>
+        </div>
+        <div class="table-scroll">
+          <table class="dash-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>Receipt</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>10 August 2026</td>
+                <td>Deposit — The Genevieve</td>
+                <td class="num">$1,200.00</td>
+                <td><a href="#" class="link-underline">Download</a></td>
+              </tr>
+              <tr>
+                <td>2 August 2026</td>
+                <td>Consultation fee (credited)</td>
+                <td class="num">$75.00</td>
+                <td><a href="#" class="link-underline">Download</a></td>
+              </tr>
+              <tr>
+                <td>15 September 2026</td>
+                <td>Alterations — first fitting</td>
+                <td class="num">$340.00</td>
+                <td><a href="#" class="link-underline">Download</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pickup -->
+    <div id="tab-pickup" class="dashboard-tab-content">
+      <div class="dash-head">
+        <h2>Pickup</h2>
+        <p>Unlocks once your final fitting is approved.</p>
+      </div>
+
+      <div class="panel">
+        <div class="empty-state">
+          <i class="ph-light ph-lock-key"></i>
+          <h4>Your gown is not ready yet</h4>
+          <p>You can schedule collection once alterations are complete and the final fitting has been signed off by your tailor.</p>
+          <button class="btn btn-outline" disabled style="opacity:.45; cursor: not-allowed;">Schedule Pickup</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Profile -->
+    <div id="tab-profile" class="dashboard-tab-content">
+      <div class="dash-head">
+        <h2>Profile</h2>
+        <p>Keep these current — we confirm every appointment by phone.</p>
+      </div>
+
+      <form class="panel" style="max-width: 620px;">
+        <div class="form-group">
+          <label for="p-name">Full Name</label>
+          <input type="text" id="p-name" class="form-control" value="Emma Chamberlain">
+        </div>
+        <div class="form-group">
+          <label for="p-email">Email Address</label>
+          <input type="email" id="p-email" class="form-control" value="emma@example.com">
+        </div>
+        <div class="form-group">
+          <label for="p-phone">Phone Number</label>
+          <input type="tel" id="p-phone" class="form-control" value="+1 (555) 123-4567">
+        </div>
+        <div class="form-group">
+          <label for="p-date">Wedding Date</label>
+          <input type="date" id="p-date" class="form-control" value="2027-09-12">
+        </div>
+        <button type="button" class="btn btn-primary" style="margin-top: var(--spacing-2);">Save Changes</button>
+      </form>
+    </div>
+
+  </main>
+
+  <script src="assets/js/dashboard.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found — Atelier</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/rtl.css">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <style>
+    .error-wrap {
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 160px var(--gutter) var(--spacing-8);
+      position: relative;
+      overflow: hidden;
+    }
+    .error-wrap::before {
+      content: '';
+      position: absolute;
+      width: 820px; height: 820px;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(176,141,79,.16), transparent 62%);
+      pointer-events: none;
+    }
+    .error-code {
+      font-family: var(--font-heading);
+      font-size: clamp(7rem, 5rem + 14vw, 16rem);
+      line-height: .85;
+      font-weight: 300;
+      background: var(--gold-grad);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      opacity: .85;
+      margin-bottom: var(--spacing-3);
+    }
+    .error-links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: var(--spacing-5); }
+  </style>
+</head>
+<body>
+  <div class="scroll-progress"></div>
+
+  <!-- Announcement -->
+  <div class="topbar">
+    <i class="ph-light ph-sparkle"></i> The 2026 Collection has arrived — private previews now open
+  </div>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-logo">Atelier<small>Bridal Salon</small></a>
+
+      <nav class="nav-menu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="home2.html" class="nav-link">Home 2</a>
+        <a href="shop.html" class="nav-link">Shop</a>
+        <a href="bridal-party.html" class="nav-link">Bridal Party</a>
+        <a href="appointments.html" class="nav-link">Appointments</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="icon-btn rtl-toggle" aria-label="Toggle text direction"><i class="ph-light ph-arrows-left-right"></i></button>
+        <button class="icon-btn theme-toggle" aria-label="Toggle theme"><i class="ph-light ph-moon"></i></button>
+        <a href="login.html" class="btn btn-primary btn-sm nav-cta">Login</a>
+        <button class="icon-btn hamburger" aria-label="Open menu" aria-expanded="false"><i class="ph-light ph-list"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer">
+    <button class="icon-btn drawer-close" aria-label="Close menu"><i class="ph-light ph-x"></i></button>
+    <nav class="drawer-menu">
+      <a href="index.html" class="drawer-link">Home</a>
+      <a href="home2.html" class="drawer-link">Home 2</a>
+      <a href="shop.html" class="drawer-link">Shop</a>
+      <a href="bridal-party.html" class="drawer-link">Bridal Party</a>
+      <a href="appointments.html" class="drawer-link">Appointments</a>
+      <a href="about.html" class="drawer-link">About</a>
+      <a href="contact.html" class="drawer-link">Contact</a>
+      <a href="dashboard.html" class="drawer-link">Dashboard</a>
+    </nav>
+    <div class="drawer-actions">
+      <button class="icon-btn rtl-toggle" aria-label="Toggle text direction"><i class="ph-light ph-arrows-left-right"></i></button>
+      <button class="icon-btn theme-toggle" aria-label="Toggle theme"><i class="ph-light ph-moon"></i></button>
+      <a href="login.html" class="btn btn-primary btn-sm">Login</a>
+    </div>
+  </div>
+  <div class="overlay"></div>
+
+  <!-- 404 -->
+  <section class="error-wrap">
+    <div class="container fade-in" style="position: relative; z-index: 1;">
+      <div class="error-code">404</div>
+      <span class="eyebrow">Page not found</span>
+      <h2 style="margin-bottom: var(--spacing-3);">Lost in the tulle</h2>
+      <p style="color: var(--muted); max-width: 52ch; margin: 0 auto;">
+        The page you are looking for may have been moved, renamed, or is briefly out for alterations.
+      </p>
+      <div class="error-links">
+        <a href="index.html" class="btn btn-primary">Return Home</a>
+        <a href="shop.html" class="btn btn-outline">Browse the Collection</a>
+      </div>
+    </div>
+  </section>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

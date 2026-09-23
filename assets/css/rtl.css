@@ -1,0 +1,176 @@
+/* ============================================================
+   ATELIER — RTL overrides
+   Loaded after style.css; only direction-dependent rules live here.
+   ============================================================ */
+
+html[dir="rtl"], .rtl {
+  direction: rtl;
+  text-align: right;
+}
+
+/* ---------- Mobile drawer: slides in from the left ---------- */
+html[dir="rtl"] .mobile-drawer,
+.rtl .mobile-drawer {
+  right: auto;
+  left: -110%;
+  box-shadow: 30px 0 80px -30px rgba(0,0,0,.35);
+}
+html[dir="rtl"] .mobile-drawer.open,
+.rtl .mobile-drawer.open { left: 0; right: auto; }
+
+html[dir="rtl"] .mobile-drawer::before,
+.rtl .mobile-drawer::before { left: auto; right: 0; }
+
+html[dir="rtl"] .drawer-close,
+.rtl .drawer-close { align-self: flex-start; }
+
+html[dir="rtl"] .mobile-drawer.open .drawer-link,
+.rtl .mobile-drawer.open .drawer-link { transform: translateX(-24px); }
+
+html[dir="rtl"] .drawer-link::after,
+.rtl .drawer-link::after {
+  content: '\2190';
+  transform: translateX(8px);
+}
+html[dir="rtl"] .drawer-link:hover::after,
+.rtl .drawer-link:hover::after { transform: translateX(0); }
+
+/* ---------- Underline sweeps originate from the other edge ---------- */
+html[dir="rtl"] .nav-link::after,
+html[dir="rtl"] .link-underline::after,
+.rtl .nav-link::after,
+.rtl .link-underline::after { transform-origin: left; }
+
+html[dir="rtl"] .nav-link:hover::after,
+html[dir="rtl"] .nav-link.active::after,
+.rtl .nav-link:hover::after,
+.rtl .nav-link.active::after { transform-origin: right; }
+
+html[dir="rtl"] .link-underline:hover::after,
+.rtl .link-underline:hover::after { transform-origin: right; }
+
+/* ---------- Card / progress fills ---------- */
+html[dir="rtl"] .card::before,
+html[dir="rtl"] .finder-progress .dot::after,
+.rtl .card::before,
+.rtl .finder-progress .dot::after { transform-origin: right; }
+
+/* ---------- Interactive modules ---------- */
+html[dir="rtl"] .finder-option,
+.rtl .finder-option { text-align: right; }
+
+html[dir="rtl"] .finder-option:hover,
+.rtl .finder-option:hover { transform: translateX(-4px); }
+
+html[dir="rtl"] .finder-option .chev,
+.rtl .finder-option .chev { margin-left: 0; margin-right: auto; transform: scaleX(-1); }
+
+html[dir="rtl"] .finder-option:hover .chev,
+.rtl .finder-option:hover .chev { transform: scaleX(-1) translateX(4px); }
+
+html[dir="rtl"] .switch::after,
+.rtl .switch::after { left: auto; right: 3px; }
+
+html[dir="rtl"] .switch[aria-pressed="true"]::after,
+.rtl .switch[aria-pressed="true"]::after { transform: translateX(-24px); }
+
+html[dir="rtl"] .studio-estimate,
+.rtl .studio-estimate { text-align: left; margin-left: 0; margin-right: auto; }
+
+html[dir="rtl"] .studio-group-head .current,
+html[dir="rtl"] .studio-summary .row b,
+.rtl .studio-group-head .current,
+.rtl .studio-summary .row b { text-align: left; }
+
+/* ---------- Tiles, captions and stage feet stay left-read ---------- */
+html[dir="rtl"] .tile-body,
+html[dir="rtl"] .finder-visual-caption,
+.rtl .tile-body,
+.rtl .finder-visual-caption { text-align: right; }
+
+/* ---------- Dashboard ---------- */
+html[dir="rtl"] .panel-accent,
+.rtl .panel-accent { border-left: 1px solid var(--border-color); border-right: 2px solid var(--accent-color); }
+
+/* ---------- Auth pages ---------- */
+html[dir="rtl"] .auth-toggles,
+.rtl .auth-toggles { right: auto; left: var(--gutter); }
+
+html[dir="rtl"] .auth-back,
+.rtl .auth-back { left: auto; right: var(--gutter); }
+
+html[dir="rtl"] .auth-back i,
+.rtl .auth-back i { transform: scaleX(-1); }
+
+html[dir="rtl"] .password-wrap .form-control,
+.rtl .password-wrap .form-control { padding-right: 16px; padding-left: 52px; }
+
+html[dir="rtl"] .password-toggle,
+.rtl .password-toggle { right: auto; left: 8px; }
+
+html[dir="rtl"] .terms-row .check-inline,
+.rtl .terms-row .check-inline { text-align: right; }
+
+/* ---------- Featured testimonial ---------- */
+html[dir="rtl"] .tf-dot::after,
+.rtl .tf-dot::after { transform-origin: right; }
+
+html[dir="rtl"] .tf-nav i,
+.rtl .tf-nav i { transform: scaleX(-1); }
+
+/* ---------- Portal shell ---------- */
+html[dir="rtl"] .portal-rail,
+.rtl .portal-rail {
+  left: auto; right: 0;
+  border-right: none;
+  border-left: 1px solid var(--border-color);
+}
+
+html[dir="rtl"] .portal-bar,
+.rtl .portal-bar { left: 0; right: var(--dash-rail); }
+
+html[dir="rtl"] .portal-bar-actions,
+.rtl .portal-bar-actions { margin-left: 0; margin-right: auto; }
+
+html[dir="rtl"] .portal-main,
+.rtl .portal-main { margin-left: 0; margin-right: var(--dash-rail); }
+
+html[dir="rtl"] .dashboard-tab-btn,
+.rtl .dashboard-tab-btn { text-align: right; }
+
+html[dir="rtl"] .dashboard-tab-btn::after,
+.rtl .dashboard-tab-btn::after { right: auto; left: calc(-1 * var(--spacing-2)); }
+
+@media (max-width: 1439px) {
+  html[dir="rtl"] .portal-rail,
+  .rtl .portal-rail {
+    transform: translateX(100%);
+    box-shadow: -30px 0 80px -30px rgba(0,0,0,.35);
+  }
+  html[dir="rtl"] .portal-rail.open,
+  .rtl .portal-rail.open { transform: translateX(0); }
+
+  html[dir="rtl"] .portal-bar,
+  .rtl .portal-bar { right: 0; }
+
+  html[dir="rtl"] .portal-main,
+  .rtl .portal-main { margin-right: 0; }
+}
+
+/* ---------- Reveal directions mirror ---------- */
+html[dir="rtl"] [data-reveal="left"],
+.rtl [data-reveal="left"] { transform: translateX(40px); }
+html[dir="rtl"] [data-reveal="right"],
+.rtl [data-reveal="right"] { transform: translateX(-40px); }
+
+/* ---------- Marquee runs the other way ---------- */
+html[dir="rtl"] .marquee-track,
+.rtl .marquee-track { animation-direction: reverse; }
+
+/* Active drawer link: mirror the gold bar */
+html[dir="rtl"] .drawer-link.active,
+.rtl .drawer-link.active {
+  padding-left: 0; padding-right: 16px;
+  box-shadow: inset -2px 0 0 var(--accent-color);
+  background: linear-gradient(270deg, rgba(176,141,79,.14), transparent 85%);
+}

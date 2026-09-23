@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Genevieve — Atelier</title>
+  <meta name="description" content="The Genevieve: an A-line silk Mikado gown with a softly draped bodice and chapel train. Book a private fitting at Atelier.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/rtl.css">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <style>
+    .product-grid {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: clamp(28px, 4vw, 72px);
+      align-items: start;
+    }
+    .product-images { display: flex; flex-direction: column; gap: var(--spacing-2); }
+    .main-image-frame {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      aspect-ratio: 3/4;
+      background: var(--surface-2);
+      box-shadow: var(--shadow-lg);
+    }
+    .main-image {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: opacity .5s var(--ease);
+    }
+    .thumbnail-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-2); }
+    .thumbnail-grid button {
+      padding: 0;
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      cursor: pointer;
+      background: none;
+      aspect-ratio: 3/4;
+      transition: var(--transition);
+    }
+    .thumbnail-grid img { width: 100%; height: 100%; object-fit: cover; opacity: .62; transition: var(--transition); }
+    .thumbnail-grid button:hover img, .thumbnail-grid button.active img { opacity: 1; }
+    .thumbnail-grid button.active { border-color: var(--accent-color); }
+
+    .product-details { position: sticky; top: 120px; }
+    .product-price {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      color: var(--primary-color);
+      margin-bottom: var(--spacing-3);
+    }
+    .product-price small {
+      display: block;
+      font-family: var(--font-body);
+      font-size: .7rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+    .product-meta {
+      margin: var(--spacing-4) 0;
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      padding: var(--spacing-2) 0;
+    }
+    .product-meta-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--border-color);
+      font-size: .92rem;
+    }
+    .product-meta-item:last-child { border-bottom: none; }
+    .product-meta-item strong {
+      font-weight: 400;
+      font-size: .68rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .product-actions { display: grid; gap: 12px; }
+    .product-note {
+      display: flex; gap: 12px; align-items: flex-start;
+      margin-top: var(--spacing-3);
+      padding: var(--spacing-3);
+      background: var(--surface-2);
+      border-radius: var(--border-radius);
+      font-size: .86rem;
+      color: var(--muted);
+    }
+    .product-note i { color: var(--accent-color); font-size: 1.2rem; flex-shrink: 0; }
+
+    @media (max-width: 900px) {
+      .product-grid { grid-template-columns: 1fr; }
+      .product-details { position: static; }
+    }
+  </style>
+</head>
+<body>
+  <div class="scroll-progress"></div>
+
+  <!-- Announcement -->
+  <div class="topbar">
+    <i class="ph-light ph-sparkle"></i> The 2026 Collection has arrived — private previews now open
+  </div>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-logo">Atelier<small>Bridal Salon</small></a>
+
+      <nav class="nav-menu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="home2.html" class="nav-link">Home 2</a>
+        <a href="shop.html" class="nav-link active">Shop</a>
+        <a href="bridal-party.html" class="nav-link">Bridal Party</a>
+        <a href="appointments.html" class="nav-link">Appointments</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="icon-btn rtl-toggle" aria-label="Toggle text direction"><i class="ph-light ph-arrows-left-right"></i></button>
+        <button class="icon-btn theme-toggle" aria-label="Toggle theme"><i class="ph-light ph-moon"></i></button>
+        <a href="login.html" class="btn btn-primary btn-sm nav-cta">Login</a>
+        <button class="icon-btn hamburger" aria-label="Open menu" aria-expanded="false"><i class="ph-light ph-list"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer">
+    <button class="icon-btn drawer-close" aria-label="Close menu"><i class="ph-light ph-x"></i></button>
+    <nav class="drawer-menu">
+      <a href="index.html" class="drawer-link">Home</a>
+      <a href="home2.html" class="drawer-link">Home 2</a>
+      <a href="shop.html" class="drawer-link active">Shop</a>
+      <a href="bridal-party.html" class="drawer-link">Bridal Party</a>
+      <a href="appointments.html" class="drawer-link">Appointments</a>
+      <a href="about.html" class="drawer-link">About</a>
+      <a href="contact.html" class="drawer-link">Contact</a>
+      <a href="dashboard.html" class="drawer-link">Dashboard</a>
+    </nav>
+    <div class="drawer-actions">
+      <button class="icon-btn rtl-toggle" aria-label="Toggle text direction"><i class="ph-light ph-arrows-left-right"></i></button>
+      <button class="icon-btn theme-toggle" aria-label="Toggle theme"><i class="ph-light ph-moon"></i></button>
+      <a href="login.html" class="btn btn-primary btn-sm">Login</a>
+    </div>
+  </div>
+  <div class="overlay"></div>
+
+  <!-- Product -->
+  <section class="section" style="padding-top: clamp(140px, 17vh, 200px);">
+    <div class="container">
+
+      <nav class="breadcrumb" style="margin-bottom: var(--spacing-5);">
+        <a href="shop.html">Collection</a>
+        <span class="sep">/</span>
+        <a href="shop.html">Atelier Exclusive</a>
+        <span class="sep">/</span>
+        <span>The Genevieve</span>
+      </nav>
+
+      <div class="product-grid">
+
+        <!-- Images -->
+        <div class="product-images" data-reveal="left">
+          <div class="main-image-frame">
+            <img src="https://images.unsplash.com/photo-1549417229-aa67d3263c09?q=80&amp;w=1974&amp;auto=format&amp;fit=crop"
+                 alt="The Genevieve" class="main-image" id="mainImage">
+          </div>
+          <div class="thumbnail-grid">
+            <button type="button" class="active" data-src="https://images.unsplash.com/photo-1549417229-aa67d3263c09?q=80&amp;w=1974&amp;auto=format&amp;fit=crop">
+              <img src="https://images.unsplash.com/photo-1549417229-aa67d3263c09?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="The Genevieve, front">
+            </button>
+            <button type="button" data-src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&amp;w=2000&amp;auto=format&amp;fit=crop">
+              <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="The Genevieve, train detail">
+            </button>
+            <button type="button" data-src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&amp;w=2000&amp;auto=format&amp;fit=crop">
+              <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="The Genevieve, bodice detail">
+            </button>
+          </div>
+        </div>
+
+        <!-- Details -->
+        <div class="product-details" data-reveal="right">
+          <span class="badge" style="margin-bottom: var(--spacing-2);">Atelier Exclusive</span>
+          <h1 style="font-size: clamp(2.2rem, 1.7rem + 2vw, 3.4rem); margin-bottom: var(--spacing-2);">The Genevieve</h1>
+
+          <div class="product-price">
+            $2,400
+            <small>Excluding alterations · Estimate at fitting</small>
+          </div>
+
+          <p style="color: var(--muted); margin-bottom: var(--spacing-3);">
+            The Genevieve embodies timeless romance. Cut from luxurious silk Mikado, this A-line gown pairs a softly draped bodice with an off-the-shoulder neckline and a dramatic chapel-length train — classic sophistication with one modern turn.
+          </p>
+          <p style="color: var(--muted);">
+            Mikado holds its shape without boning, so the gown sits clean through the waist and moves as one piece. It is the gown we reach for when a bride says she wants to be comfortable and still be seen.
+          </p>
+
+          <div class="product-meta">
+            <div class="product-meta-item"><strong>Designer</strong><span>Atelier Exclusive</span></div>
+            <div class="product-meta-item"><strong>Silhouette</strong><span>A-Line</span></div>
+            <div class="product-meta-item"><strong>Fabric</strong><span>Silk Mikado</span></div>
+            <div class="product-meta-item"><strong>Neckline</strong><span>Off-the-Shoulder</span></div>
+            <div class="product-meta-item"><strong>Train</strong><span>Chapel</span></div>
+            <div class="product-meta-item"><strong>Sizes in salon</strong><span>UK 8 – 20</span></div>
+          </div>
+
+          <div class="product-actions">
+            <a href="appointments.html?gown=The%20Genevieve" class="btn btn-primary btn-lg btn-block">Book a Fitting for This Gown</a>
+            <button type="button" class="btn btn-outline btn-block" id="saveBtn">
+              <i class="ph-light ph-heart"></i> Save to Favourites
+            </button>
+          </div>
+
+          <div class="product-note">
+            <i class="ph-light ph-info"></i>
+            <span>Order to delivery runs six to eight months. If your date is sooner, call us — we keep a small number of sample gowns available for rush alteration.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- You may also like -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header" data-reveal>
+        <span class="eyebrow">From the Same Rail</span>
+        <h2>You may also like</h2>
+      </div>
+      <div class="collections-grid">
+        <article class="card" style="padding: 0; align-items: stretch; text-align: left; --delay: 0ms;" data-reveal>
+          <a href="gown-single.html" class="card-img-wrapper" style="margin-bottom: 0; border-radius: 0;">
+            <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&amp;w=2000&amp;auto=format&amp;fit=crop" alt="The Amelie">
+          </a>
+          <div style="padding: var(--spacing-3);">
+            <h4 style="margin-bottom: 4px;"><a href="gown-single.html">The Amelie</a></h4>
+            <p style="font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px;">Ball Gown · Maison Blanche</p>
+            <div style="display:flex; justify-content: space-between; align-items: center;">
+              <span class="price">$3,100</span>
+              <a href="gown-single.html" class="link-underline">Details</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" style="padding: 0; align-items: stretch; text-align: left; --delay: 120ms;" data-reveal>
+          <a href="gown-single.html" class="card-img-wrapper" style="margin-bottom: 0; border-radius: 0;">
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&amp;w=2000&amp;auto=format&amp;fit=crop" alt="The Celine">
+          </a>
+          <div style="padding: var(--spacing-3);">
+            <h4 style="margin-bottom: 4px;"><a href="gown-single.html">The Celine</a></h4>
+            <p style="font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px;">Mermaid · L'Amour</p>
+            <div style="display:flex; justify-content: space-between; align-items: center;">
+              <span class="price">$2,800</span>
+              <a href="gown-single.html" class="link-underline">Details</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" style="padding: 0; align-items: stretch; text-align: left; --delay: 240ms;" data-reveal>
+          <a href="gown-single.html" class="card-img-wrapper" style="margin-bottom: 0; border-radius: 0;">
+            <img src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?q=80&amp;w=2070&amp;auto=format&amp;fit=crop" alt="The Juliette">
+          </a>
+          <div style="padding: var(--spacing-3);">
+            <h4 style="margin-bottom: 4px;"><a href="gown-single.html">The Juliette</a></h4>
+            <p style="font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px;">Sheath · Atelier Exclusive</p>
+            <div style="display:flex; justify-content: space-between; align-items: center;">
+              <span class="price">$1,900</span>
+              <a href="gown-single.html" class="link-underline">Details</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a href="index.html" class="nav-logo">Atelier<small>Bridal Salon</small></a>
+          <p>An intimate, high-touch gown fitting salon for the romantic bride. 123 Elegance Avenue, Paris 75008.</p>
+          <div class="social-row">
+            <a href="#" aria-label="Instagram"><i class="ph-light ph-instagram-logo"></i></a>
+            <a href="#" aria-label="Pinterest"><i class="ph-light ph-pinterest-logo"></i></a>
+            <a href="#" aria-label="Facebook"><i class="ph-light ph-facebook-logo"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="shop.html">The Collection</a></li>
+            <li><a href="home2.html">2026 Lookbook</a></li>
+            <li><a href="appointments.html">Appointments</a></li>
+            <li><a href="bridal-party.html">Bridal Party</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Client Care</h4>
+          <ul>
+            <li><a href="login.html">Bride Portal</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="coming-soon.html">Alterations Studio</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>The Invitation List</h4>
+          <p>Trunk shows, sample sales and private previews — a few times a year, never more.</p>
+          <form class="newsletter-form">
+            <input type="email" placeholder="Your email" class="form-control" aria-label="Email address" required>
+            <button type="submit" class="btn btn-primary">Join</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Atelier Bridal Boutique. All rights reserved.</p>
+        <div class="legal">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="contact.html">Press</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+    // Gallery thumbnails
+    const mainImage = document.getElementById('mainImage');
+    document.querySelectorAll('.thumbnail-grid button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.thumbnail-grid button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        mainImage.style.opacity = '0';
+        setTimeout(() => {
+          mainImage.src = btn.dataset.src;
+          mainImage.style.opacity = '1';
+        }, 220);
+      });
+    });
+
+    // Favourite toggle
+    const saveBtn = document.getElementById('saveBtn');
+    saveBtn?.addEventListener('click', () => {
+      const on = saveBtn.classList.toggle('is-saved');
+      saveBtn.innerHTML = on
+        ? '<i class="ph-fill ph-heart"></i> Saved to Favourites'
+        : '<i class="ph-light ph-heart"></i> Save to Favourites';
+    });
+  </script>
+</body>
+</html>

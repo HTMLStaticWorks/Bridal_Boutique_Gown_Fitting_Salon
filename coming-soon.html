@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coming Soon — Atelier</title>
+  <meta name="description" content="The Atelier Alterations Studio opens soon. Join the list to be told first.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/rtl.css">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <style>
+    .soon {
+      position: relative;
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: var(--spacing-8) var(--gutter);
+      color: #fff;
+      overflow: hidden;
+    }
+    .soon-media {
+      position: absolute; inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1591604466107-ec97de577aff?q=80&w=2070&auto=format&fit=crop');
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.06);
+      animation: kenburns 24s ease-out infinite alternate;
+    }
+    .soon::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(20,12,10,.68), rgba(20,12,10,.5) 45%, rgba(20,12,10,.8));
+      z-index: 1;
+    }
+    .soon-inner { position: relative; z-index: 2; max-width: 620px; }
+    .soon-inner h1 { color: #fff; margin-bottom: var(--spacing-2); }
+    .soon-inner .eyebrow { color: var(--accent-soft); }
+    .soon-inner .eyebrow::before, .soon-inner .eyebrow::after { background: rgba(255,255,255,.45); }
+    .soon-inner > p { color: rgba(255,255,255,.85); }
+
+    .countdown {
+      display: flex;
+      gap: clamp(14px, 3vw, 30px);
+      justify-content: center;
+      align-items: flex-start;
+      margin: var(--spacing-6) 0;
+    }
+    .count-cell { min-width: 74px; }
+    .count-num {
+      font-family: var(--font-heading);
+      font-size: clamp(2.6rem, 2rem + 3vw, 4rem);
+      line-height: 1;
+      font-weight: 300;
+      font-variant-numeric: tabular-nums;
+    }
+    .count-label {
+      font-size: .6rem;
+      text-transform: uppercase;
+      letter-spacing: .26em;
+      opacity: .75;
+      margin-top: 10px;
+    }
+    .count-sep {
+      font-family: var(--font-heading);
+      font-size: clamp(2.2rem, 1.8rem + 2vw, 3.2rem);
+      line-height: 1;
+      color: var(--accent-soft);
+      opacity: .6;
+    }
+
+    .soon-form { display: flex; gap: 10px; margin-top: var(--spacing-3); }
+    .soon-form .form-control {
+      background: rgba(255,255,255,.1);
+      border-color: rgba(255,255,255,.32);
+      color: #fff;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .soon-form .form-control::placeholder { color: rgba(255,255,255,.6); }
+    .soon-form .form-control:focus { border-color: #fff; background: rgba(255,255,255,.16); box-shadow: 0 0 0 4px rgba(255,255,255,.12); }
+
+    .soon-back {
+      position: absolute;
+      bottom: var(--spacing-4);
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      font-size: .68rem;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.75);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .soon-back:hover { color: #fff; }
+
+    @media (max-width: 480px) {
+      .soon-form { flex-direction: column; }
+      .soon-form .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="soon">
+    <div class="soon-media"></div>
+
+    <div class="soon-inner fade-in">
+      <span class="eyebrow">Opening 2026</span>
+      <h1>The Alterations Studio</h1>
+      <p>A second floor on Elegance Avenue, given over entirely to our master tailors. Fittings by appointment from the spring.</p>
+
+      <div class="countdown" id="countdown" aria-label="Time until opening">
+        <div class="count-cell"><div class="count-num" data-unit="days">14</div><div class="count-label">Days</div></div>
+        <div class="count-sep">:</div>
+        <div class="count-cell"><div class="count-num" data-unit="hours">08</div><div class="count-label">Hours</div></div>
+        <div class="count-sep">:</div>
+        <div class="count-cell"><div class="count-num" data-unit="minutes">45</div><div class="count-label">Mins</div></div>
+        <div class="count-sep">:</div>
+        <div class="count-cell"><div class="count-num" data-unit="seconds">00</div><div class="count-label">Secs</div></div>
+      </div>
+
+      <p style="font-size: .92rem;">Be the first to know when we open the doors.</p>
+      <form class="soon-form">
+        <input type="email" placeholder="Your email address" class="form-control" aria-label="Email address" required>
+        <button type="submit" class="btn btn-gold">Notify Me</button>
+      </form>
+    </div>
+
+    <a href="index.html" class="soon-back"><i class="ph-light ph-arrow-left"></i> Back to Atelier</a>
+  </section>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+    // Live countdown — 14 days, 8 hours, 45 minutes from first load.
+    (function () {
+      const root = document.getElementById('countdown');
+      if (!root) return;
+
+      const KEY = 'atelier-launch';
+      let target = Number(localStorage.getItem(KEY));
+      if (!target || Number.isNaN(target) || target < Date.now()) {
+        target = Date.now() + ((14 * 24 * 60 + 8 * 60 + 45) * 60 * 1000);
+        try { localStorage.setItem(KEY, String(target)); } catch (e) { /* private mode */ }
+      }
+
+      const cells = {};
+      root.querySelectorAll('[data-unit]').forEach(el => { cells[el.dataset.unit] = el; });
+      const pad = (n) => String(n).padStart(2, '0');
+
+      const tick = () => {
+        const left = Math.max(0, target - Date.now());
+        const s = Math.floor(left / 1000);
+        cells.days.textContent = pad(Math.floor(s / 86400));
+        cells.hours.textContent = pad(Math.floor(s / 3600) % 24);
+        cells.minutes.textContent = pad(Math.floor(s / 60) % 60);
+        cells.seconds.textContent = pad(s % 60);
+      };
+
+      tick();
+      setInterval(tick, 1000);
+    })();
+  </script>
+</body>
+</html>
