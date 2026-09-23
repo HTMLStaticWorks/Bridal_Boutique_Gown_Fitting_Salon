@@ -9,6 +9,7 @@
     content="A private, high-touch bridal atelier. Curated designer gowns, in-house master tailoring, and appointments made for one bride at a time.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/rtl.css">
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
@@ -25,7 +26,7 @@
   <!-- Navbar -->
   <header class="navbar">
     <div class="container nav-container">
-      <a href="index.html" class="nav-logo">Atelier<small>Bridal Salon</small></a>
+      <a href="index.html" class="nav-logo"><img src="assets/images/atelier-logo.svg" alt="Atelier Bridal Salon" class="logo-img" width="197" height="40"></a>
 
       <nav class="nav-menu">
         <a href="index.html" class="nav-link active">Home</a>
@@ -73,8 +74,7 @@
 
   <!-- Hero -->
   <section class="hero">
-    <div class="hero-media"
-      style="background-image: url('https://images.unsplash.com/photo-1591604466107-ec97de577aff?q=80&amp;w=2070&amp;auto=format&amp;fit=crop');">
+    <div class="hero-media" style="background-image: url('assets/images/hero-bridal-salon-banner.jpg');">
     </div>
     <div class="hero-content fade-in">
       <span class="eyebrow">Est. 2015 &middot; Paris</span>
@@ -86,10 +86,7 @@
         <a href="#finder" class="btn btn-light btn-lg">Find Your Silhouette</a>
       </div>
     </div>
-    <div class="hero-scroll" aria-hidden="true">
-      <span class="line"></span>
-      Scroll
-    </div>
+
   </section>
 
   <!-- Designer marquee -->
@@ -115,36 +112,33 @@
       </div>
 
       <div class="collections-grid">
-        <a href="shop.html" class="tile" data-reveal style="--delay: 0ms">
-          <div class="tile-bg"
-            style="background-image: url('https://images.unsplash.com/photo-1549417229-aa67d3263c09?q=80&amp;w=1974&amp;auto=format&amp;fit=crop');">
+        <a href="shop.html" class="tile tile-stacked" data-reveal style="--delay: 0ms">
+          <div class="tile-bg" style="background-image: url('assets/images/collection-classic-silk-satin.jpg');">
           </div>
           <div class="tile-body">
-            <span class="eyebrow eyebrow-start">01 — Silk &amp; Satin</span>
+            <span class="eyebrow">01 — Silk &amp; Satin</span>
             <h3>The Classic</h3>
             <p>Timeless silhouettes cut in silk Mikado and duchesse satin.</p>
             <span class="link-underline">View Collection</span>
           </div>
         </a>
 
-        <a href="shop.html" class="tile" data-reveal style="--delay: 120ms">
-          <div class="tile-bg"
-            style="background-image: url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&amp;w=2000&amp;auto=format&amp;fit=crop');">
+        <a href="shop.html" class="tile tile-stacked" data-reveal style="--delay: 120ms">
+          <div class="tile-bg" style="background-image: url('assets/images/collection-romantic-lace-tulle.jpg');">
           </div>
           <div class="tile-body">
-            <span class="eyebrow eyebrow-start">02 — Lace &amp; Tulle</span>
+            <span class="eyebrow">02 — Lace &amp; Tulle</span>
             <h3>The Romantic</h3>
             <p>Intricate Chantilly lace and sweeping cathedral trains.</p>
             <span class="link-underline">View Collection</span>
           </div>
         </a>
 
-        <a href="shop.html" class="tile" data-reveal style="--delay: 240ms">
-          <div class="tile-bg"
-            style="background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&amp;w=2000&amp;auto=format&amp;fit=crop');">
+        <a href="shop.html" class="tile tile-stacked" data-reveal style="--delay: 240ms">
+          <div class="tile-bg" style="background-image: url('assets/images/collection-modern-crepe-line.jpg');">
           </div>
           <div class="tile-body">
-            <span class="eyebrow eyebrow-start">03 — Crepe &amp; Line</span>
+            <span class="eyebrow">03 — Crepe &amp; Line</span>
             <h3>The Modern</h3>
             <p>Clean lines, no embellishment, quiet confidence.</p>
             <span class="link-underline">View Collection</span>
@@ -171,16 +165,16 @@
         <!-- Visual side -->
         <div class="finder-visual">
           <div class="fv-img is-active" data-key="classic"
-            style="background-image: url('https://images.unsplash.com/photo-1549417229-aa67d3263c09?q=80&amp;w=1974&amp;auto=format&amp;fit=crop');">
+            style="background-image: url('assets/images/finder-visual-classic.jpg');">
           </div>
           <div class="fv-img" data-key="romantic"
-            style="background-image: url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&amp;w=2000&amp;auto=format&amp;fit=crop');">
+            style="background-image: url('assets/images/finder-visual-romantic.jpg');">
           </div>
           <div class="fv-img" data-key="modern"
-            style="background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&amp;w=2000&amp;auto=format&amp;fit=crop');">
+            style="background-image: url('assets/images/finder-visual-modern.jpg');">
           </div>
           <div class="fv-img" data-key="ethereal"
-            style="background-image: url('https://images.unsplash.com/photo-1591604466107-ec97de577aff?q=80&amp;w=2070&amp;auto=format&amp;fit=crop');">
+            style="background-image: url('assets/images/finder-visual-ethereal.jpg');">
           </div>
 
           <div class="finder-visual-caption">
@@ -320,9 +314,7 @@
     <div class="container">
       <div class="split split-story">
         <div data-reveal="left">
-          <img
-            src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&amp;w=1887&amp;auto=format&amp;fit=crop"
-            alt="Inside the Atelier fitting salon"
+          <img src="assets/images/about-atelier-fitting-salon-interior.jpg" alt="Inside the Atelier fitting salon"
             style="border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); aspect-ratio: 4/5; object-fit: cover; width: 100%;">
         </div>
         <div data-reveal="right">
@@ -369,19 +361,22 @@
 
       <div class="features-grid">
         <div class="feature" data-reveal style="--delay: 0ms">
-          <div class="feature-media"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&amp;auto=format&amp;fit=crop&amp;w=800" alt="Tailor pinning a bridal gown" loading="lazy"></div>
+          <div class="feature-media"><img src="assets/images/feature-tailor-pinning-gown.jpg"
+              alt="Tailor pinning a bridal gown" loading="lazy"></div>
           <div class="feature-icon"><i class="ph-light ph-scissors"></i></div>
           <h4>In-House Alterations</h4>
           <p>Master tailors on site, from first pin to final press — nothing leaves the building.</p>
         </div>
         <div class="feature" data-reveal style="--delay: 100ms">
-          <div class="feature-media"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&amp;auto=format&amp;fit=crop&amp;w=800" alt="Private fitting salon" loading="lazy"></div>
+          <div class="feature-media"><img src="assets/images/feature-private-fitting-salon.jpg"
+              alt="Private fitting salon" loading="lazy"></div>
           <div class="feature-icon"><i class="ph-light ph-wine"></i></div>
           <h4>Private Appointments</h4>
           <p>The whole salon, two hours, your people only. Never a shared rail.</p>
         </div>
         <div class="feature" data-reveal style="--delay: 200ms">
-          <div class="feature-media"><img src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?q=80&amp;auto=format&amp;fit=crop&amp;w=800" alt="Curated designer gowns" loading="lazy"></div>
+          <div class="feature-media"><img src="assets/images/feature-curated-designer-gowns.jpg"
+              alt="Curated designer gowns" loading="lazy"></div>
           <div class="feature-icon"><i class="ph-light ph-crown"></i></div>
           <h4>Curated Designers</h4>
           <p>Twenty-four houses, hand-picked each season for cut and cloth.</p>
@@ -403,28 +398,29 @@
           <div class="stars">★★★★★</div>
           <blockquote>"I had been to six boutiques. Twenty minutes at Atelier and I was in tears — they understood the
             shape before I could describe it."</blockquote>
-          <img class="quote-avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&amp;auto=format&amp;fit=crop&amp;w=200" alt="Marguerite D." loading="lazy">
-          <cite>Marguerite D. — June 2026</cite>
+          <img class="quote-avatar" src="assets/images/testimonial-avatar-marguerite.jpg" alt="Marguerite D."
+            loading="lazy">
+          Marguerite D. — June 2026
         </div>
         <div class="quote-card" data-reveal style="--delay: 120ms">
           <div class="stars">★★★★★</div>
           <blockquote>"The alterations were extraordinary. Three fittings and the gown moved like it had been grown on
             me."</blockquote>
-          <img class="quote-avatar" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&amp;auto=format&amp;fit=crop&amp;w=200" alt="Priya N." loading="lazy">
-          <cite>Priya N. — September 2025</cite>
+          <img class="quote-avatar" src="assets/images/testimonial-avatar-priya.jpg" alt="Priya N." loading="lazy">
+          Priya N. — September 2025
         </div>
         <div class="quote-card" data-reveal style="--delay: 240ms">
           <div class="stars">★★★★★</div>
           <blockquote>"Nobody rushed us. My mother still talks about the afternoon more than the ceremony."</blockquote>
-          <img class="quote-avatar" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&amp;auto=format&amp;fit=crop&amp;w=200" alt="Eleni K." loading="lazy">
-          <cite>Eleni K. — April 2026</cite>
+          <img class="quote-avatar" src="assets/images/testimonial-avatar-eleni.jpg" alt="Eleni K." loading="lazy">
+          Eleni K. — April 2026
         </div>
       </div>
     </div>
   </section>
 
   <!-- CTA band -->
-  <section class="cta-band">
+  <section class="cta-band cta-index">
     <div class="container" data-reveal="fade">
       <span class="eyebrow">Appointments</span>
       <h2>The salon is yours for two hours</h2>
@@ -438,7 +434,7 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col">
-          <a href="index.html" class="nav-logo">Atelier<small>Bridal Salon</small></a>
+          <a href="index.html" class="nav-logo"><img src="assets/images/atelier-logo.svg" alt="Atelier Bridal Salon" class="logo-img" width="197" height="40"></a>
           <p>An intimate, high-touch gown fitting salon for the romantic bride. 123 Elegance Avenue, Paris 75008.</p>
           <div class="social-row">
             <a href="#" aria-label="Instagram"><i class="ph-light ph-instagram-logo"></i></a>

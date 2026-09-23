@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Collection — Atelier</title>
-  <meta name="description" content="Browse the Atelier collection of designer wedding gowns — filter by silhouette, house and price, then book a private fitting.">
+  <meta name="description"
+    content="Browse the Atelier collection of designer wedding gowns — filter by silhouette, house and price, then book a private fitting.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/rtl.css">
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
@@ -17,6 +20,7 @@
       gap: clamp(28px, 4vw, 64px);
       align-items: start;
     }
+
     .shop-filters {
       position: sticky;
       top: 110px;
@@ -26,8 +30,15 @@
       padding: var(--spacing-4) var(--spacing-3);
       box-shadow: var(--shadow-sm);
     }
-    .filter-group { margin-bottom: var(--spacing-4); }
-    .filter-group:last-of-type { margin-bottom: var(--spacing-3); }
+
+    .filter-group {
+      margin-bottom: var(--spacing-4);
+    }
+
+    .filter-group:last-of-type {
+      margin-bottom: var(--spacing-3);
+    }
+
     .filter-group h4 {
       font-family: var(--font-body);
       font-size: .64rem;
@@ -39,6 +50,7 @@
       padding-bottom: 8px;
       border-bottom: 1px solid var(--border-color);
     }
+
     .filter-label {
       display: flex;
       align-items: center;
@@ -49,9 +61,21 @@
       font-size: .9rem;
       transition: var(--transition);
     }
-    .filter-label:hover { color: var(--accent-color); }
-    .filter-count { margin-left: auto; font-size: .74rem; color: var(--muted); }
-    html[dir="rtl"] .filter-count { margin-left: 0; margin-right: auto; }
+
+    .filter-label:hover {
+      color: var(--accent-color);
+    }
+
+    .filter-count {
+      margin-left: auto;
+      font-size: .74rem;
+      color: var(--muted);
+    }
+
+    html[dir="rtl"] .filter-count {
+      margin-left: 0;
+      margin-right: auto;
+    }
 
     .shop-toolbar {
       display: flex;
@@ -63,7 +87,14 @@
       margin-bottom: var(--spacing-4);
       border-bottom: 1px solid var(--border-color);
     }
-    .shop-count { font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+
+    .shop-count {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
     .shop-sort {
       background: transparent;
       border: 1px solid var(--border-color);
@@ -79,28 +110,76 @@
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: clamp(20px, 2.4vw, 34px);
     }
-    .gown-card { padding: 0; align-items: stretch; text-align: left; }
-    .gown-card .card-img-wrapper { margin-bottom: 0; border-radius: 0; }
-    .gown-body { padding: var(--spacing-3); display: flex; flex-direction: column; gap: 6px; flex: 1; }
-    .gown-body h4 { margin-bottom: 0; }
-    .gown-body h4 a:hover { color: var(--accent-color); }
-    .gown-meta { font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+
+    .gown-card {
+      padding: 0;
+      align-items: stretch;
+      text-align: left;
+    }
+
+    .gown-card .card-img-wrapper {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+
+    .gown-body {
+      padding: var(--spacing-3);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+    }
+
+    .gown-body h4 {
+      margin-bottom: 0;
+    }
+
+    .gown-body h4 a:hover {
+      color: var(--accent-color);
+    }
+
+    .gown-meta {
+      font-size: .74rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
     .gown-foot {
-      display: flex; align-items: center; justify-content: space-between; gap: 12px;
-      margin-top: auto; padding-top: var(--spacing-2);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: auto;
+      padding-top: var(--spacing-2);
       border-top: 1px solid var(--border-color);
     }
 
-    .filters-toggle { display: none; }
+    .filters-toggle {
+      display: none;
+    }
 
     @media (max-width: 900px) {
-      .shop-layout { grid-template-columns: 1fr; }
-      .shop-filters { position: static; display: none; }
-      .shop-filters.open { display: block; }
-      .filters-toggle { display: inline-flex; }
+      .shop-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .shop-filters {
+        position: static;
+        display: none;
+      }
+
+      .shop-filters.open {
+        display: block;
+      }
+
+      .filters-toggle {
+        display: inline-flex;
+      }
     }
   </style>
 </head>
+
 <body>
   <div class="scroll-progress"></div>
 
@@ -112,7 +191,7 @@
   <!-- Navbar -->
   <header class="navbar">
     <div class="container nav-container">
-      <a href="index.html" class="nav-logo">Atelier<small>Bridal Salon</small></a>
+      <a href="index.html" class="nav-logo"><img src="assets/images/atelier-logo.svg" alt="Atelier Bridal Salon" class="logo-img" width="197" height="40"></a>
 
       <nav class="nav-menu">
         <a href="index.html" class="nav-link">Home</a>
@@ -126,10 +205,12 @@
       </nav>
 
       <div class="nav-actions">
-        <button class="icon-btn rtl-toggle" aria-label="Toggle text direction"><i class="ph-light ph-arrows-left-right"></i></button>
+        <button class="icon-btn rtl-toggle" aria-label="Toggle text direction"><i
+            class="ph-light ph-arrows-left-right"></i></button>
         <button class="icon-btn theme-toggle" aria-label="Toggle theme"><i class="ph-light ph-moon"></i></button>
         <a href="login.html" class="btn btn-primary btn-sm nav-cta">Login</a>
-        <button class="icon-btn hamburger" aria-label="Open menu" aria-expanded="false"><i class="ph-light ph-list"></i></button>
+        <button class="icon-btn hamburger" aria-label="Open menu" aria-expanded="false"><i
+            class="ph-light ph-list"></i></button>
       </div>
     </div>
   </header>
@@ -148,7 +229,8 @@
       <a href="dashboard.html" class="drawer-link">Dashboard</a>
     </nav>
     <div class="drawer-actions">
-      <button class="icon-btn rtl-toggle" aria-label="Toggle text direction"><i class="ph-light ph-arrows-left-right"></i></button>
+      <button class="icon-btn rtl-toggle" aria-label="Toggle text direction"><i
+          class="ph-light ph-arrows-left-right"></i></button>
       <button class="icon-btn theme-toggle" aria-label="Toggle theme"><i class="ph-light ph-moon"></i></button>
       <a href="login.html" class="btn btn-primary btn-sm">Login</a>
     </div>
@@ -160,7 +242,8 @@
     <div class="container">
       <span class="eyebrow fade-in">Spring / Summer 2026</span>
       <h1 class="fade-in">The Collection</h1>
-      <p class="fade-in">Twenty-four houses, edited down to the gowns we would put our own name on. Filter by silhouette or designer — then come and stand inside one.</p>
+      <p class="fade-in">Twenty-four houses, edited down to the gowns we would put our own name on. Filter by silhouette
+        or designer — then come and stand inside one.</p>
     </div>
   </section>
 
@@ -180,8 +263,10 @@
           </div>
           <div class="filter-group">
             <h4>House</h4>
-            <label class="filter-label"><input type="checkbox"> Atelier Exclusive <span class="filter-count">14</span></label>
-            <label class="filter-label"><input type="checkbox"> Maison Blanche <span class="filter-count">7</span></label>
+            <label class="filter-label"><input type="checkbox"> Atelier Exclusive <span
+                class="filter-count">14</span></label>
+            <label class="filter-label"><input type="checkbox"> Maison Blanche <span
+                class="filter-count">7</span></label>
             <label class="filter-label"><input type="checkbox"> L'Amour <span class="filter-count">5</span></label>
             <label class="filter-label"><input type="checkbox"> Céleste Rive <span class="filter-count">9</span></label>
           </div>
@@ -223,7 +308,7 @@
             <article class="card gown-card" data-reveal style="--delay: 0ms">
               <a href="gown-single.html" class="card-img-wrapper">
                 <span class="badge badge-float">New</span>
-                <img src="https://images.unsplash.com/photo-1549417229-aa67d3263c09?q=80&amp;w=1974&amp;auto=format&amp;fit=crop" alt="The Genevieve gown">
+                <img src="assets/images/shop-gown-genevieve-card.jpg" alt="The Genevieve gown">
               </a>
               <div class="gown-body">
                 <h4><a href="gown-single.html">The Genevieve</a></h4>
@@ -237,7 +322,7 @@
 
             <article class="card gown-card" data-reveal style="--delay: 100ms">
               <a href="gown-single.html" class="card-img-wrapper">
-                <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&amp;w=2000&amp;auto=format&amp;fit=crop" alt="The Amelie gown">
+                <img src="assets/images/shop-gown-amelie-card.jpg" alt="The Amelie gown">
               </a>
               <div class="gown-body">
                 <h4><a href="gown-single.html">The Amelie</a></h4>
@@ -252,7 +337,7 @@
             <article class="card gown-card" data-reveal style="--delay: 200ms">
               <a href="gown-single.html" class="card-img-wrapper">
                 <span class="badge badge-float">In salon</span>
-                <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&amp;w=2000&amp;auto=format&amp;fit=crop" alt="The Celine gown">
+                <img src="assets/images/shop-gown-celine-card.jpg" alt="The Celine gown">
               </a>
               <div class="gown-body">
                 <h4><a href="gown-single.html">The Celine</a></h4>
@@ -266,7 +351,7 @@
 
             <article class="card gown-card" data-reveal style="--delay: 300ms">
               <a href="gown-single.html" class="card-img-wrapper">
-                <img src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?q=80&amp;w=2070&amp;auto=format&amp;fit=crop" alt="The Juliette gown">
+                <img src="assets/images/shop-gown-juliette-card.jpg" alt="The Juliette gown">
               </a>
               <div class="gown-body">
                 <h4><a href="gown-single.html">The Juliette</a></h4>
@@ -281,7 +366,7 @@
 
             <article class="card gown-card" data-reveal style="--delay: 400ms">
               <a href="gown-single.html" class="card-img-wrapper">
-                <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&amp;w=2000&amp;auto=format&amp;fit=crop" alt="The Seraphine gown">
+                <img src="assets/images/shop-gown-seraphine-card.jpg" alt="The Seraphine gown">
               </a>
               <div class="gown-body">
                 <h4><a href="gown-single.html">The Seraphine</a></h4>
@@ -295,7 +380,7 @@
 
             <article class="card gown-card" data-reveal style="--delay: 500ms">
               <a href="gown-single.html" class="card-img-wrapper">
-                <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&amp;w=2000&amp;auto=format&amp;fit=crop" alt="The Rosalie gown">
+                <img src="assets/images/shop-gown-rosalie-card.jpg" alt="The Rosalie gown">
               </a>
               <div class="gown-body">
                 <h4><a href="gown-single.html">The Rosalie</a></h4>
@@ -317,7 +402,7 @@
   </section>
 
   <!-- CTA band -->
-  <section class="cta-band">
+  <section class="cta-band cta-shop">
     <div class="container" data-reveal="fade">
       <span class="eyebrow">Not sure where to start?</span>
       <h2>Let the salon choose for you</h2>
@@ -331,7 +416,7 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col">
-          <a href="index.html" class="nav-logo">Atelier<small>Bridal Salon</small></a>
+          <a href="index.html" class="nav-logo"><img src="assets/images/atelier-logo.svg" alt="Atelier Bridal Salon" class="logo-img" width="197" height="40"></a>
           <p>An intimate, high-touch gown fitting salon for the romantic bride. 123 Elegance Avenue, Paris 75008.</p>
           <div class="social-row">
             <a href="#" aria-label="Instagram"><i class="ph-light ph-instagram-logo"></i></a>
@@ -385,4 +470,5 @@
     });
   </script>
 </body>
+
 </html>
