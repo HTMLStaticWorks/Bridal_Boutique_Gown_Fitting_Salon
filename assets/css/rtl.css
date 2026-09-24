@@ -88,6 +88,10 @@ html[dir="rtl"] .finder-visual-caption,
 .rtl .tile-body,
 .rtl .finder-visual-caption { text-align: right; }
 
+/* Stacked collection cards stay centred */
+html[dir="rtl"] .tile-stacked .tile-body,
+.rtl .tile-stacked .tile-body { text-align: center; }
+
 /* ---------- Dashboard ---------- */
 html[dir="rtl"] .panel-accent,
 .rtl .panel-accent { border-left: 1px solid var(--border-color); border-right: 2px solid var(--accent-color); }
@@ -162,6 +166,8 @@ html[dir="rtl"] [data-reveal="left"],
 .rtl [data-reveal="left"] { transform: translateX(40px); }
 html[dir="rtl"] [data-reveal="right"],
 .rtl [data-reveal="right"] { transform: translateX(-40px); }
+html[dir="rtl"] [data-reveal].is-visible,
+.rtl [data-reveal].is-visible { transform: none; }
 
 /* ---------- Marquee runs the other way ---------- */
 html[dir="rtl"] .marquee-track,
@@ -174,3 +180,16 @@ html[dir="rtl"] .drawer-link.active,
   box-shadow: inset -2px 0 0 var(--accent-color);
   background: linear-gradient(270deg, rgba(176,141,79,.14), transparent 85%);
 }
+
+/* ---------- Back to top: bottom-left in RTL ---------- */
+html[dir="rtl"] .back-to-top,
+.rtl .back-to-top { right: auto; left: clamp(16px, 3vw, 32px); }
+
+/* ---------- English copy in RTL: keep trailing punctuation at the end ---------- */
+html[dir="rtl"] :is(p, h1, h2, h3, h4, h5, h6, li, blockquote, label, small, .check-inline > span, .auth-link),
+.rtl :is(p, h1, h2, h3, h4, h5, h6, li, blockquote, label, small, .check-inline > span, .auth-link) { unicode-bidi: plaintext; }
+
+/* plaintext makes English copy resolve as LTR, so "start" would mean left —
+   pin form text to the right edge explicitly. */
+html[dir="rtl"] :is(.form-group, .form-group label),
+.rtl :is(.form-group, .form-group label) { text-align: right; }

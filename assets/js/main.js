@@ -69,13 +69,31 @@ document.addEventListener('DOMContentLoaded', () => {
      RTL toggle (persisted)
   --------------------------------------------------------- */
   const rtlToggles = document.querySelectorAll('.rtl-toggle');
+
+  // The logo SVG has a mirrored twin with the icon on the right.
+  const syncLogos = () => {
+    const rtl = document.documentElement.getAttribute('dir') === 'rtl';
+    document.querySelectorAll('img.logo-img').forEach(img => {
+      const src = img.getAttribute('src');
+      const next = rtl ? src.replace(/atelier-logo.svg$/, 'atelier-logo-rtl.svg')
+                       : src.replace(/atelier-logo-rtl.svg$/, 'atelier-logo.svg');
+      if (next !== src) img.setAttribute('src', next);
+    });
+  };
+
   if (localStorage.getItem('rtl') === 'rtl') document.documentElement.setAttribute('dir', 'rtl');
+  syncLogos();
 
   rtlToggles.forEach(toggle => {
     toggle.addEventListener('click', () => {
-      const next = document.documentElement.getAttribute('dir') === 'rtl' ? 'ltr' : 'rtl';
-      document.documentElement.setAttribute('dir', next);
+      const root = document.documentElement;
+      const next = root.getAttribute('dir') === 'rtl' ? 'ltr' : 'rtl';
+      root.classList.add('dir-switching');
+      root.setAttribute('dir', next);
       localStorage.setItem('rtl', next);
+      syncLogos();
+      // Two frames: let the new layout paint before transitions come back.
+      requestAnimationFrame(() => requestAnimationFrame(() => root.classList.remove('dir-switching')));
     });
   });
 
@@ -85,9 +103,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const progress = document.querySelector('.scroll-progress');
   let ticking = false;
 
+  const toTop = document.createElement('button');
+  toTop.type = 'button';
+  toTop.className = 'back-to-top';
+  toTop.setAttribute('aria-label', 'Back to top');
+  toTop.innerHTML = '<i class="ph-light ph-arrow-up"></i>';
+  toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  document.body.appendChild(toTop);
+
   const onScroll = () => {
     const y = window.scrollY;
     document.body.classList.toggle('scrolled', y > 40);
+    toTop.classList.toggle('show', y > 600);
 
     if (progress) {
       const max = document.documentElement.scrollHeight - window.innerHeight;
