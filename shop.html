@@ -160,6 +160,23 @@
       border-top: 1px solid var(--border-color);
     }
 
+    .gown-cta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .gown-cta .btn {
+      padding: 11px 16px;
+    }
+
+    .shop-empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      color: var(--muted);
+      padding: var(--spacing-6) 0;
+    }
+
     .filters-toggle {
       display: none;
     }
@@ -249,6 +266,13 @@
       <h1 class="fade-in">The Collection</h1>
       <p class="fade-in">Twenty-four houses, edited down to the gowns we would put our own name on. Filter by silhouette
         or designer — then come and stand inside one.</p>
+      <div class="collection-tabs fade-in" role="tablist" aria-label="Filter by collection">
+        <button type="button" class="collection-tab is-active" data-collection="all">All Gowns</button>
+        <button type="button" class="collection-tab" data-collection="classic">The Classic</button>
+        <button type="button" class="collection-tab" data-collection="romantic">The Romantic</button>
+        <button type="button" class="collection-tab" data-collection="modern">The Modern</button>
+        <button type="button" class="collection-tab" data-collection="ethereal">The Ethereal</button>
+      </div>
     </div>
   </section>
 
@@ -259,6 +283,13 @@
 
         <!-- Filters -->
         <aside class="shop-filters" id="filters">
+          <div class="filter-group">
+            <h4>Collection</h4>
+            <label class="filter-label"><input type="checkbox"> The Classic <span class="filter-count">11</span></label>
+            <label class="filter-label"><input type="checkbox"> The Romantic <span class="filter-count">10</span></label>
+            <label class="filter-label"><input type="checkbox"> The Modern <span class="filter-count">8</span></label>
+            <label class="filter-label"><input type="checkbox"> The Ethereal <span class="filter-count">6</span></label>
+          </div>
           <div class="filter-group">
             <h4>Silhouette</h4>
             <label class="filter-label"><input type="checkbox"> A-Line <span class="filter-count">12</span></label>
@@ -294,7 +325,7 @@
         <!-- Grid -->
         <main>
           <div class="shop-toolbar">
-            <span class="shop-count">Showing 6 of 35 gowns</span>
+            <span class="shop-count" data-shop-count>Showing 6 of 35 gowns</span>
             <div style="display:flex; gap:10px; align-items:center;">
               <button class="btn btn-outline btn-sm filters-toggle" type="button" aria-controls="filters">
                 <i class="ph-light ph-sliders-horizontal"></i> Filters
@@ -310,92 +341,118 @@
 
           <div class="shop-grid">
 
-            <article class="card gown-card" data-reveal style="--delay: 0ms">
+            <article class="card gown-card" data-collection="classic" data-reveal style="--delay: 0ms">
               <a href="gown-single.html" class="card-img-wrapper">
                 <span class="badge badge-float">New</span>
                 <img src="assets/images/shop-gown-genevieve-card.jpg" alt="The Genevieve gown">
               </a>
               <div class="gown-body">
+                <span class="collection-label">The Classic Collection</span>
                 <h4><a href="gown-single.html">The Genevieve</a></h4>
                 <p class="gown-meta">A-Line · Atelier Exclusive</p>
                 <div class="gown-foot">
                   <span class="price">$2,400</span>
-                  <a href="gown-single.html" class="link-underline">Details</a>
+                  <div class="gown-cta">
+                    <a href="gown-single.html" class="link-underline">Details</a>
+                    <a href="appointments.html?gown=The%20Genevieve&amp;order=1" class="btn btn-primary btn-sm">Order Now</a>
+                  </div>
                 </div>
               </div>
             </article>
 
-            <article class="card gown-card" data-reveal style="--delay: 100ms">
+            <article class="card gown-card" data-collection="romantic" data-reveal style="--delay: 100ms">
               <a href="gown-single.html" class="card-img-wrapper">
                 <img src="assets/images/shop-gown-amelie-card.jpg" alt="The Amelie gown">
               </a>
               <div class="gown-body">
+                <span class="collection-label">The Romantic Collection</span>
                 <h4><a href="gown-single.html">The Amelie</a></h4>
                 <p class="gown-meta">Ball Gown · Maison Blanche</p>
                 <div class="gown-foot">
                   <span class="price">$3,100</span>
-                  <a href="gown-single.html" class="link-underline">Details</a>
+                  <div class="gown-cta">
+                    <a href="gown-single.html" class="link-underline">Details</a>
+                    <a href="appointments.html?gown=The%20Amelie&amp;order=1" class="btn btn-primary btn-sm">Order Now</a>
+                  </div>
                 </div>
               </div>
             </article>
 
-            <article class="card gown-card" data-reveal style="--delay: 200ms">
+            <article class="card gown-card" data-collection="romantic" data-reveal style="--delay: 200ms">
               <a href="gown-single.html" class="card-img-wrapper">
                 <span class="badge badge-float">In salon</span>
                 <img src="assets/images/shop-gown-celine-card.jpg" alt="The Celine gown">
               </a>
               <div class="gown-body">
+                <span class="collection-label">The Romantic Collection</span>
                 <h4><a href="gown-single.html">The Celine</a></h4>
                 <p class="gown-meta">Mermaid · L'Amour</p>
                 <div class="gown-foot">
                   <span class="price">$2,800</span>
-                  <a href="gown-single.html" class="link-underline">Details</a>
+                  <div class="gown-cta">
+                    <a href="gown-single.html" class="link-underline">Details</a>
+                    <a href="appointments.html?gown=The%20Celine&amp;order=1" class="btn btn-primary btn-sm">Order Now</a>
+                  </div>
                 </div>
               </div>
             </article>
 
-            <article class="card gown-card" data-reveal style="--delay: 300ms">
+            <article class="card gown-card" data-collection="modern" data-reveal style="--delay: 300ms">
               <a href="gown-single.html" class="card-img-wrapper">
                 <img src="assets/images/shop-gown-juliette-card.jpg" alt="The Juliette gown">
               </a>
               <div class="gown-body">
+                <span class="collection-label">The Modern Collection</span>
                 <h4><a href="gown-single.html">The Juliette</a></h4>
                 <p class="gown-meta">Sheath · Atelier Exclusive</p>
                 <div class="gown-foot">
                   <span class="price">$1,900</span>
-                  <a href="gown-single.html" class="link-underline">Details</a>
+                  <div class="gown-cta">
+                    <a href="gown-single.html" class="link-underline">Details</a>
+                    <a href="appointments.html?gown=The%20Juliette&amp;order=1" class="btn btn-primary btn-sm">Order Now</a>
+                  </div>
                 </div>
               </div>
             </article>
 
 
-            <article class="card gown-card" data-reveal style="--delay: 400ms">
+            <article class="card gown-card" data-collection="classic" data-reveal style="--delay: 400ms">
               <a href="gown-single.html" class="card-img-wrapper">
-                <img src="assets/images/shop-gown-seraphine-card.jpg" alt="The Seraphine gown">
+                <img src="assets/images/shop-gown-seraphine-champagne-card.jpg" alt="The Seraphine gown">
               </a>
               <div class="gown-body">
+                <span class="collection-label">The Classic Collection</span>
                 <h4><a href="gown-single.html">The Seraphine</a></h4>
-                <p class="gown-meta">Ball Gown · Céleste Rive</p>
+                <p class="gown-meta">Ball Gown · Champagne · Céleste Rive</p>
                 <div class="gown-foot">
                   <span class="price">$3,400</span>
-                  <a href="gown-single.html" class="link-underline">Details</a>
+                  <div class="gown-cta">
+                    <a href="gown-single.html" class="link-underline">Details</a>
+                    <a href="appointments.html?gown=The%20Seraphine&amp;order=1" class="btn btn-primary btn-sm">Order Now</a>
+                  </div>
                 </div>
               </div>
             </article>
 
-            <article class="card gown-card" data-reveal style="--delay: 500ms">
+            <article class="card gown-card" data-collection="ethereal" data-reveal style="--delay: 500ms">
               <a href="gown-single.html" class="card-img-wrapper">
-                <img src="assets/images/shop-gown-rosalie-card.jpg" alt="The Rosalie gown">
+                <img src="assets/images/shop-gown-rosalie-blush-card.jpg" alt="The Rosalie gown">
               </a>
               <div class="gown-body">
+                <span class="collection-label">The Ethereal Collection</span>
                 <h4><a href="gown-single.html">The Rosalie</a></h4>
-                <p class="gown-meta">A-Line · Vera Duval</p>
+                <p class="gown-meta">A-Line · Blush · Vera Duval</p>
                 <div class="gown-foot">
                   <span class="price">$2,650</span>
-                  <a href="gown-single.html" class="link-underline">Details</a>
+                  <div class="gown-cta">
+                    <a href="gown-single.html" class="link-underline">Details</a>
+                    <a href="appointments.html?gown=The%20Rosalie&amp;order=1" class="btn btn-primary btn-sm">Order Now</a>
+                  </div>
                 </div>
               </div>
             </article>
+            <p class="shop-empty" hidden>More gowns from this collection are in the salon. <a href="appointments.html"
+                class="link-underline">Book a fitting</a></p>
           </div>
 
           <div class="text-center" style="margin-top: var(--spacing-8);">
@@ -469,6 +526,38 @@
 
   <script src="assets/js/main.js"></script>
   <script>
+    // Collection tabs (also driven by #classic, #romantic... links from the home pages)
+    (() => {
+      const tabs = document.querySelectorAll('.collection-tab');
+      const cards = document.querySelectorAll('.gown-card[data-collection]');
+      const count = document.querySelector('[data-shop-count]');
+      const empty = document.querySelector('.shop-empty');
+      const apply = (key) => {
+        if (![...tabs].some(t => t.dataset.collection === key)) key = 'all';
+        let shown = 0;
+        cards.forEach(c => {
+          const hit = key === 'all' || c.dataset.collection === key;
+          c.hidden = !hit;
+          if (hit) { shown++; c.classList.add('is-visible'); }
+        });
+        tabs.forEach(t => {
+          const on = t.dataset.collection === key;
+          t.classList.toggle('is-active', on);
+          t.setAttribute('aria-selected', on);
+        });
+        if (count) count.textContent = key === 'all'
+          ? 'Showing 6 of 35 gowns'
+          : `Showing ${shown} gown${shown === 1 ? '' : 's'} from The ${key[0].toUpperCase() + key.slice(1)}`;
+        if (empty) empty.hidden = shown > 0;
+      };
+      tabs.forEach(t => t.addEventListener('click', () => {
+        apply(t.dataset.collection);
+        history.replaceState(null, '', t.dataset.collection === 'all' ? location.pathname : '#' + t.dataset.collection);
+      }));
+      apply(location.hash.slice(1) || 'all');
+      window.addEventListener('hashchange', () => apply(location.hash.slice(1) || 'all'));
+    })();
+
     // Mobile filter drawer
     document.querySelector('.filters-toggle')?.addEventListener('click', () => {
       document.getElementById('filters').classList.toggle('open');

@@ -579,14 +579,21 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ---------------------------------------------------------
-     Appointments: prefill from ?gown= / studio selections
+     Appointments: prefill from ?gown= / ?collection= / studio selections
   --------------------------------------------------------- */
   const notes = document.querySelector('#notes');
   if (notes && window.location.search) {
     const q = new URLSearchParams(window.location.search);
     const gown = q.get('gown');
+    const collection = q.get('collection');
+    const order = q.get('order') === '1';
+    if (collection && !gown) {
+      notes.value = order
+        ? `I'd like to order a gown from ${collection}. Please pull the full range for my fitting.`
+        : `I'd love to explore ${collection}.`;
+    }
     if (gown) {
-      const bits = [`I'd love to see ${gown}.`];
+      const bits = [order ? `I'd like to order ${gown}.` : `I'd love to see ${gown}.`];
       if (q.get('fabric')) bits.push(`Fabric: ${q.get('fabric')}.`);
       if (q.get('train')) bits.push(`Train: ${q.get('train')}.`);
       if (q.get('tone')) bits.push(`Tone: ${q.get('tone')}.`);

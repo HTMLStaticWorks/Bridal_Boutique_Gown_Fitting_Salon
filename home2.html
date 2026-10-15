@@ -16,14 +16,23 @@
   <style>
     .lookbook-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2px;
-      background: var(--border-color);
+      grid-template-columns: repeat(2, 1fr);
+      gap: clamp(12px, 1.6vw, 20px);
+      width: calc(100% - 2 * var(--gutter));
+      max-width: calc(1320px - 2 * var(--gutter));
+      margin-inline: auto;
+    }
+
+    @media (max-width: 767px) {
+      .lookbook-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     .lookbook-pane {
       position: relative;
-      min-height: min(78vh, 720px);
+      min-height: min(72vh, 640px);
+      border-radius: var(--radius-lg);
       overflow: hidden;
       display: flex;
       align-items: flex-end;
@@ -111,7 +120,7 @@
       font-family: var(--font-heading);
       font-size: 2.6rem;
       color: var(--accent-color);
-      opacity: .45;
+      opacity: .8;
       line-height: 1;
       display: block;
       margin-bottom: 12px;
@@ -235,38 +244,159 @@
   </div>
   <div class="overlay"></div>
 
-  <!-- Lookbook intro -->
-  <section class="page-hero">
-    <div class="container">
-      <span class="eyebrow fade-in">Volume Eleven</span>
-      <h1 class="fade-in">The 2026 Lookbook</h1>
-      <p class="fade-in">Four silhouettes, four moods. Photographed over three days in the salon on Elegance Avenue — no
-        studio, no retouching, just morning light.</p>
+  <!-- 1. Hero — editorial split -->
+  <section class="lookbook-hero">
+    <div class="container lookbook-hero-grid">
+      <div class="fade-in">
+        <span class="eyebrow eyebrow-start">Volume Eleven &middot; Spring / Summer 2026</span>
+        <h1>The 2026 <em>Lookbook</em></h1>
+        <p class="lead">Four silhouettes, four moods, thirty-five gowns. Photographed over three days on Elegance
+          Avenue in nothing but morning light, with no retouching. Choose a collection, then come and stand inside it.</p>
+        <div class="lookbook-hero-actions">
+          <a href="#categories" class="btn btn-primary btn-lg">Explore Collections</a>
+          <a href="appointments.html" class="btn btn-outline btn-lg">Book a Preview</a>
+        </div>
+        <div class="lookbook-hero-stats">
+          <div>
+            <div class="stat-num">35</div>
+            <div class="stat-label">New gowns</div>
+          </div>
+          <div>
+            <div class="stat-num">04</div>
+            <div class="stat-label">Collections</div>
+          </div>
+          <div>
+            <div class="stat-num">24</div>
+            <div class="stat-label">Houses</div>
+          </div>
+        </div>
+      </div>
+      <div class="lookbook-hero-media fade-in">
+        <img src="assets/images/home2-hero-lookbook-cover.jpg"
+          alt="Bride in a champagne off-the-shoulder gown by a tall Parisian window">      </div>
     </div>
   </section>
 
-  <!-- Full-bleed editorial panes -->
-  <div class="lookbook-grid">
-    <article class="lookbook-pane">
-      <div class="pane-bg" style="background-image: url('assets/images/lookbook-classic-fullbleed.jpg');"></div>
-      <div class="pane-body">
-        <span class="eyebrow eyebrow-start">Chapter One</span>
-        <h2>The Classic</h2>
-        <p>Silk Mikado holds a line the way architecture does. Cut once, cut correctly.</p>
-        <a href="shop.html" class="link-underline">Explore the Classic</a>
+  <!-- 2. Shop by category -->
+  <section class="section" id="categories">
+    <div class="container">
+      <div class="section-header" data-reveal>
+        <span class="eyebrow">Shop by Category</span>
+        <h2>Start with the shape</h2>
+        <p>Every category is on the rail in the salon. Explore online, then order at your fitting, where every gown
+          is made to your measurements.</p>
       </div>
-    </article>
 
-    <article class="lookbook-pane">
-      <div class="pane-bg" style="background-image: url('assets/images/lookbook-romantic-fullbleed.jpg');"></div>
-      <div class="pane-body">
-        <span class="eyebrow eyebrow-start">Chapter Two</span>
-        <h2>The Romantic</h2>
-        <p>Nine layers of tulle and lace set by hand. You hear it before you see it.</p>
-        <a href="shop.html" class="link-underline">Explore the Romantic</a>
+      <div class="category-bento">
+        <article class="cat-tile" data-reveal style="--delay: 0ms">
+          <img src="assets/images/category-ball-gowns-mirror-hall.jpg"
+            alt="Bride in a full ivory ball gown in a mirrored hall" loading="lazy">
+          <div class="cat-body">
+            <h3>Ball Gowns</h3>
+            <p>Full skirts, structured bodices and cathedral volume. Made for the entrance.</p>
+            <div class="cat-actions">
+              <a href="appointments.html?collection=Ball%20Gowns&amp;order=1" class="btn btn-primary btn-sm">Order Now</a>
+              <a href="shop.html#romantic" class="link-underline">Explore Collection</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="cat-tile" data-reveal style="--delay: 100ms">
+          <img src="assets/images/category-mermaid-lace-balcony.jpg"
+            alt="Bride in a fitted lace mermaid gown on a stone balcony at sunset" loading="lazy">
+          <div class="cat-body">
+            <h3>Mermaid &amp; Fit-and-Flare</h3>
+            <div class="cat-actions">
+              <a href="appointments.html?collection=Mermaid%20Gowns&amp;order=1" class="btn btn-primary btn-sm">Order Now</a>
+              <a href="shop.html#romantic" class="link-underline">Explore</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="cat-tile" data-reveal style="--delay: 200ms">
+          <img src="assets/images/category-colour-bridal-blush-tulle.jpg"
+            alt="Bride in a blush-pink tulle gown among dusty-rose flowers" loading="lazy">
+          <div class="cat-body">
+            <h3>Colour Bridal</h3>
+            <div class="cat-actions">
+              <a href="appointments.html?collection=Colour%20Bridal&amp;order=1" class="btn btn-primary btn-sm">Order Now</a>
+              <a href="shop.html#ethereal" class="link-underline">Explore</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="cat-tile" data-reveal style="--delay: 300ms">
+          <img src="assets/images/category-veils-accessories-vanity.jpg"
+            alt="Cathedral veil, pearl hair comb and silk shoes on an antique vanity" loading="lazy">
+          <div class="cat-body">
+            <h3>Veils &amp; Accessories</h3>
+            <p>Hand-rolled cathedral veils, pearl combs and silk shoes, styled at your final fitting.</p>
+            <div class="cat-actions">
+              <a href="appointments.html?collection=Veils%20and%20Accessories&amp;order=1"
+                class="btn btn-primary btn-sm">Order Now</a>
+              <a href="coming-soon.html" class="link-underline">Explore Collection</a>
+            </div>
+          </div>
+        </article>
       </div>
-    </article>
-  </div>
+    </div>
+  </section>
+
+  <!-- 3. Lookbook chapters -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header" data-reveal>
+        <span class="eyebrow">The Lookbook</span>
+        <h2>Four chapters, four moods</h2>
+        <p>One collection per chapter. Each pane opens that collection in the shop.</p>
+      </div>
+    </div>
+    <div class="lookbook-grid">
+      <article class="lookbook-pane">
+        <div class="pane-bg" style="background-image: url('assets/images/lookbook-classic-courtyard-bride.jpg');"></div>
+        <div class="pane-body">
+          <span class="pane-num">01</span>
+          <span class="eyebrow eyebrow-start">Chapter One</span>
+          <h2>The Classic</h2>
+          <p>Silk Mikado holds a line the way architecture does. Cut once, cut correctly.</p>
+          <a href="shop.html#classic" class="link-underline">Explore the Classic</a>
+        </div>
+      </article>
+
+      <article class="lookbook-pane">
+        <div class="pane-bg" style="background-image: url('assets/images/lookbook-romantic-fullbleed.jpg');"></div>
+        <div class="pane-body">
+          <span class="pane-num">02</span>
+          <span class="eyebrow eyebrow-start">Chapter Two</span>
+          <h2>The Romantic</h2>
+          <p>Nine layers of tulle and lace set by hand. You hear it before you see it.</p>
+          <a href="shop.html#romantic" class="link-underline">Explore the Romantic</a>
+        </div>
+      </article>
+
+      <article class="lookbook-pane">
+        <div class="pane-bg" style="background-image: url('assets/images/lookbook-modern-rooftop-bride.jpg');"></div>
+        <div class="pane-body">
+          <span class="pane-num">03</span>
+          <span class="eyebrow eyebrow-start">Chapter Three</span>
+          <h2>The Modern</h2>
+          <p>Heavy crepe and one clean seam. The gown steps back so you don't have to.</p>
+          <a href="shop.html#modern" class="link-underline">Explore the Modern</a>
+        </div>
+      </article>
+
+      <article class="lookbook-pane">
+        <div class="pane-bg" style="background-image: url('assets/images/lookbook-ethereal-meadow-bride.jpg');"></div>
+        <div class="pane-body">
+          <span class="pane-num">04</span>
+          <span class="eyebrow eyebrow-start">Chapter Four</span>
+          <h2>The Ethereal</h2>
+          <p>Champagne chiffon that moves before you do. Built for wind and late light.</p>
+          <a href="shop.html#ethereal" class="link-underline">Explore the Ethereal</a>
+        </div>
+      </article>
+    </div>
+  </section>
 
   <!-- Marquee -->
   <div class="marquee" aria-hidden="true">
@@ -297,13 +427,13 @@
         <!-- Stage -->
         <div class="studio-stage">
           <div class="studio-layer is-active" data-key="classic"
-            style="background-image: url('assets/images/studio-stage-classic.jpg');"></div>
+            style="background-image: url('assets/images/studio-alcove-aline.jpg');"></div>
           <div class="studio-layer" data-key="romantic"
-            style="background-image: url('assets/images/studio-stage-romantic.jpg');"></div>
+            style="background-image: url('assets/images/studio-alcove-ballgown.jpg');"></div>
           <div class="studio-layer" data-key="modern"
-            style="background-image: url('assets/images/studio-stage-modern.jpg');"></div>
+            style="background-image: url('assets/images/studio-alcove-mermaid.jpg');"></div>
           <div class="studio-layer" data-key="sheath"
-            style="background-image: url('assets/images/studio-stage-sheath.jpg');"></div>
+            style="background-image: url('assets/images/studio-alcove-sheath.jpg');"></div>
 
           <div class="studio-tint"></div>
           <div class="studio-veil"></div>
@@ -407,7 +537,7 @@
   <!-- Bespoke experience split -->
   <section class="section section-alt">
     <div class="container">
-      <div class="split split-story">
+      <div class="split split-story split-reverse">
         <div data-reveal="left">
           <img src="assets/images/experience-fitting-mirror-moment.jpg" alt="A bride at her fitting"
             style="border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); aspect-ratio: 4/5; object-fit: cover; width: 100%;">
@@ -474,10 +604,10 @@
 
         <!-- Portraits -->
         <div class="tf-media">
-          <div class="tf-img is-active" style="background-image: url('assets/images/testimonial-portrait-eleni.jpg');">
-          </div>
-          <div class="tf-img" style="background-image: url('assets/images/testimonial-portrait-marguerite.jpg');"></div>
+          <div class="tf-img is-active"
+            style="background-image: url('assets/images/testimonial-portrait-marguerite.jpg');"></div>
           <div class="tf-img" style="background-image: url('assets/images/testimonial-portrait-priya.jpg');"></div>
+          <div class="tf-img" style="background-image: url('assets/images/testimonial-portrait-eleni.jpg');"></div>
         </div>
 
         <!-- Quotes -->
